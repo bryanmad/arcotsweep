@@ -185,6 +185,7 @@
 
             	.small {
             		font-size: 4vh;
+              color: lime;
             		display: inline-block;
             		height: 7vh;
             		line-height: 7vh;
@@ -303,7 +304,112 @@
                 #score7,
                 #score8,
                 #score9 {
-                    margin: 3vh;
+                    //margin: 3vh;
+                    width: calc(100vw / 3);
+                    color: lime;
+                    border-radius: 10px;
+                    border: 5px solid gray;
+                    height:7vh;
+
+
+
+
+
+
+
+
+
+                    //button {
+                      $btnColor: #0053d0;
+                      $btnTextColor: #fff;
+                      $btnTextFocusColor: lighten($btnColor,40%);
+                      $btnEdge: 0.2em;
+                      $btnHoleEdge: 0.1em;
+                      $dropShadowColor: rgba(0,0,0,0.47);
+                      $darkEdgeColor: rgba(0,0,0,0.27);
+                      $lightEdgeColor: rgba(255,255,255,0.27);
+                      $coloredDarkEdgeColor: darken($btnColor,10%);
+                      $coloredDarkerEdgeColor: darken($btnColor,20%);
+                      background:
+                        // top-to-bottom shading
+                        linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.13)),
+                        // reflection at top
+                        radial-gradient(90% 7% at 50% 8%,rgba(255,255,255,0.47) 25%,rgba(255,255,255,0) 50%),
+                        $btnColor;
+                      border: 0 {
+                        radius: 0.375em;
+                      };
+                      box-shadow:
+                        // drop shadow
+                        $btnEdge $btnEdge 0.5em $dropShadowColor,
+                        // top, left, and right edges of hole
+                        0 (-$btnHoleEdge) 0 $btnHoleEdge $darkEdgeColor,
+                        // bottom edge of hole
+                        0 $btnHoleEdge 0 $btnHoleEdge $lightEdgeColor,
+                        // right edge of button
+                        (-$btnEdge) 0 $btnEdge $coloredDarkEdgeColor inset,
+                        // top edge of button
+                        0 $btnEdge $btnEdge $lightEdgeColor inset,
+                        // left edge of button
+                        $btnEdge 0 $btnEdge $lightEdgeColor inset,
+                        // bottom edge of button
+                        0 (-$btnEdge) $btnEdge $coloredDarkEdgeColor inset;
+                      color: $btnTextColor;
+                      cursor: pointer;
+                      font: 24px/1.5 sans-serif;
+                      margin: 1.5em auto;
+                      padding: 0.5em 1em;
+                      text-shadow: 0 0 $btnEdge fade-out($btnTextColor,0.53);
+                      transition-property: box-shadow;
+                      -webkit-tap-highlight-color: transparent;
+                      &, span {
+                        display: block;
+                        transition: {
+                          duration: 0.1s;
+                          timing-function: linear;
+                        }
+                        &:focus {
+                          outline: none;
+                        }
+                      }
+                      span {
+                        transition-property: transform;
+                        will-change: transform;
+                      }
+                      &:active {
+                        box-shadow:
+                          // pull shadow inward
+                          0 0 0 $dropShadowColor,
+                          // edges of hole stay the same
+                          0 (-$btnHoleEdge) 0 $btnHoleEdge $darkEdgeColor,
+                          0 $btnHoleEdge 0 $btnHoleEdge $lightEdgeColor,
+                          // darker right shadow with a bit of blue to result from button being deep into hole
+                          (-$btnEdge) 0 $btnEdge $coloredDarkerEdgeColor inset,
+                          // similar shadow at top and left
+                          0 $btnEdge $btnEdge $darkEdgeColor inset,
+                          $btnEdge 0 $btnEdge $darkEdgeColor inset,
+                          // same as 4th shadow but coming from bottom
+                          0 (-$btnEdge) $btnEdge $coloredDarkerEdgeColor inset;
+                        span {
+                          transform: scale(0.95);
+                        }
+                      }
+                      &:focus {
+                        color: $btnTextFocusColor;
+                        text-shadow: 0 0 $btnEdge fade-out($btnTextFocusColor,0.53);
+                      }
+                   // }
+
+
+
+
+
+
+
+
+
+
+
                 }
 
                 #page {
@@ -466,91 +572,74 @@
                             <td id="back9strokes">0</td>
                             <td id="back9points">0</td>
                         </tr>
+                        <!-- numberpad -->
                         <tr>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score1"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    1
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score1"
+                                onclick="numberScore(this.id)"
+                            >
+                                1
                             </td>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score2"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    2
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score2"
+                                onclick="numberScore(this.id)"
+                            >
+                                2
                             </td>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score3"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    3
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score3"
+                                onclick="numberScore(this.id)"
+                            >
+                                3
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score4"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    4
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score4"
+                                onclick="numberScore(this.id)"
+                            >
+                                4
                             </td>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score5"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    5
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score5"
+                                onclick="numberScore(this.id)"
+                            >
+                                5
                             </td>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score6"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    6
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score6"
+                                onclick="numberScore(this.id)"
+                            >
+                                6
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score7"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    7
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score7"
+                                onclick="numberScore(this.id)"
+                            >
+                                7
                             </td>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score8"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    8
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score8"
+                                onclick="numberScore(this.id)"
+                            >
+                                8
                             </td>
-                            <td colspan="2">
-                                <div
-                                    class="small scorelow"
-                                    id="score9"
-                                    onclick="numberScore(this.id)"
-                                >
-                                    9
-                                </div>
+                            <td
+                                colspan="2"
+                                id="score9"
+                                onclick="numberScore(this.id)"
+                            >
+                                9
                             </td>
                         </tr>
                     </tbody>
@@ -563,7 +652,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             <!-- invisible but necessary for submit of data	-->
             <!-- form to construct data prior to submit -->
             <form
-                action="https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/formResponse"
+                action="https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/formResponse"
                 id="my-form"
                 method="post"
                 name="my-form"
@@ -844,16 +933,21 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             </form>
             <!-- google iframe inserted here - invisible -->
             <iframe
-                height="0"
+                height="100"
                 id="my-response-iframe"
                 name="my-response-iframe"
-                src="https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/viewform?embedded=true"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/viewform?embedded=true"
                 width="600"
             >
             </iframe>
         </div>
 
         <!--
+
+        https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/viewform?usp=preview
+
+
+
 
 			<div class="submit" onclick="submitForm()">
 				<div id="submit">submit</div>
