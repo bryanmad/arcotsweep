@@ -986,13 +986,17 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
 
             dd = new Date();
             day = dd.getDay();
-
+            date = dd.getDate();
+            month = dd.getMonth();
+            days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
             //============================================
             // default
             //console.log(day + " using Monday as default")
             // console.log(day + " Monday")
             course = "Arcot";
-            fullday = "Monday";
+            fullday = days[day] + " " + date + " " + months[month];
+            console.log(fullday)
             setupArcotCourse();
             //============================================
 
@@ -1033,7 +1037,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             // need to set up a couple of arrays from the data in google sheets
             async function getData() {
                 var dataStream = await fetch(
-                    "https://opensheet.elk.sh/1ddB8yCSfaIn864DGe-pqDwaILtLj5QYsdfGOCCUCy4E/setupcsv",
+                    "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/hcpscsv",
                 );
 
                 if (!dataStream.ok) {
@@ -1216,7 +1220,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                             player1name = playerName;
                             // change "select player to course
                             document.getElementById("dropbtn").innerText =
-                                player1name + " " + player1hcp + ":  " + course;
+                                player1name + " " + player1hcp + ":  " + days[day];
                         }
                     }
                     // find player in options list
