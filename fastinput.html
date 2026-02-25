@@ -326,24 +326,6 @@
                 }
 
 
-                #score1,
-                #score2,
-                #score3,
-                #score4,
-                #score5,
-                #score6,
-                #score7,
-                #score8,
-                #score9 {
-                    //margin: 3vh;
-                    width: calc(100vw / 3);
-                    color: lime;
-                    border-radius: 10px;
-                    border: 5px solid gray;
-                    height:12vh;
-                    font-size: 10vw;
-
-                }
 
                 #page {
 
@@ -398,6 +380,102 @@
                 width: 5vh;
             }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /* for each day */
+            #menu1 {
+                text-align: center;
+                color: white;
+                font-size: 8vh;
+                height: auto;
+            }
+
+            .team {
+                //position: absolute;
+                width: 90%;
+                height: 5vh;
+                margin-left: 5%;
+                margin-top: 1%;
+                margin-bottom: 1%;
+                background: rgba(105, 105, 105, 0.8);
+                box-shadow: 0 3px 5px black;
+                display: flex;
+                align-items: center;
+                transition-property: top;
+                transition-duration: 1500ms;
+                border-radius: 10px;
+                transition-timing-function: cubic-bezier(
+                    0.68,
+                    -0.55,
+                    0.265,
+                    1.55
+                );
+                border: 4px solid rgba(255, 255, 255, 0.3);
+                background-clip: padding-box;
+            }
+
+            .name {
+                height: 50%;
+                width: 75%;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                font-size: 1.3rem;
+                color: white;
+                font-weight: 400;
+                text-transform: capitalize;
+            }
+
+            .score {
+                height: 50%;
+                width: 12%;
+                font-size: 1.3rem;
+                color: white;
+                font-weight: 400;
+                display: flex;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .position {
+                height: 50%;
+                width: 12%;
+                font-size: 1.3rem;
+                color: white;
+                font-weight: 400;
+                display: flex;
+                text-align: center;
+                justify-content: center;
+            }
+
+
+
+
+
+
+
+
+
         </style>
     </head>
 
@@ -411,7 +489,9 @@
                 <div id="playersDropdown" class="dropdown-content"></div>
             </div>
 
-            <div id="showleaderboard" onclick="closeLeaderBoard()"></div>
+            <div id="showleaderboard" onclick="closeLeaderBoard()">
+                 <div id="menu1"></div>
+            </div>
 
             <div id="acceptpanel">
                 <span id="playerx"></span>
@@ -944,6 +1024,8 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             var arrLadies = [];
             var arrOptions = [];
             var oldArrOptions = [];
+            var arrPlayersDropdown = [];
+            var arrHcpsDropdown = [];
             var compcourse = "none";
             var compdate = "";
             var shotsscore = "";
@@ -961,7 +1043,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
 
             var player1hcp = "?";
             var fullday = "";
-
+//var datastream;
             var player1teecolor = "yellow";
 
             var whichhole = 1;
@@ -979,6 +1061,12 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             var alltxt18 = "";
 
             var scorelist = "";
+
+
+
+            var data;
+
+
             //==============================================================
             // data may change so retrieve it on each occasion
             //==============================================================
@@ -1033,50 +1121,43 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             //===========================
             //change wording to show downloading, change back when complete
             document.getElementById("dropbtn").innerText = "searching ...";
-            getData();
+            getData4Dropdown();
+
+
             // need to set up a couple of arrays from the data in google sheets
-            async function getData() {
-                var dataStream = await fetch(
-                    "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/hcpscsv",
+            async function getData4Dropdown() {
+                datastream = await fetch(
+                    "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/setupcsv",
                 );
 
-                if (!dataStream.ok) {
-                    const message = `An error has occured: ${dataStream.status}`;
+                if (!datastream.ok) {
+                    const message = `An error has occured: ${datastream.status}`;
                     //throw new Error(message);
                     alert("error: " + message);
                 }
-                var resultsarray = await dataStream.json();
+                var resultsarray = await datastream.json();
                 // split into separate arrays
-                arrPlayers = resultsarray.map((d) => d.players);
-                arrHcps = resultsarray.map((d) => d.hcps);
+                arrPlayersDropdown = resultsarray.map((d) => d.players);
+                arrHcpsDropdown = resultsarray.map((d) => d.hcps);
 
                 // remove null items
-                arrPlayers = arrPlayers.filter(function (el) {
+                arrPlayersDropdown = arrPlayersDropdown.filter(function (el) {
                     return el != null;
                 });
-                arrHcps = arrHcps.filter(function (el) {
+                arrHcpsDropdown = arrHcpsDropdown.filter(function (el) {
                     return el != null;
                 });
 
                 // remove empty items
-                arrPlayers = arrPlayers.filter(function (el) {
+                arrPlayersDropdown = arrPlayersDropdown.filter(function (el) {
                     return el != "";
                 });
-                arrHcps = arrHcps.filter(function (el) {
+                arrHcpsDropdown = arrHcpsDropdown.filter(function (el) {
                     return el != "";
                 });
 
                 dd = new Date();
                 day = dd.getDay();
-
-                // get rid of "old" localStorage but keep dropdown options
-                for (var i = 0; i < localStorage.length; i++) {
-                    if (localStorage.key(i).substring(0, 2) == "ww") {
-                        if (localStorage.key(i) !== "wwdropdown") {
-                            localStorage.removeItem(localStorage.key(i));
-                        }
-                    }
-                }
 
                 // put correct wording back - signifies download completed
                 document.getElementById("dropbtn").innerText = "select player";
@@ -1090,33 +1171,13 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             // - initialise everything and do checks etc.
             //=============================================================
             function start() {
-                // check for any previous selections
-                // setup local dropdown if not there
-                if ("wwdropdown" in localStorage) {
-                    oldArrOptions = JSON.parse(localStorage.wwdropdown);
-                }
+
                 // create options array for dropdown
-                for (var i = 0; i < arrPlayers.length; i++) {
-                    x = arrPlayers[i];
+                for (var i = 0; i < arrPlayersDropdown.length; i++) {
+                    x = arrPlayersDropdown[i];
                     arrOptions.push([x, 0]);
                 }
-                // update Options array with choices info
-                for (var i = 0; i < oldArrOptions.length; i++) {
-                    // if there is a value
-                    if (oldArrOptions[i][1] > 0) {
-                        for (var j = 0; j < arrOptions.length; j++) {
-                            // if names match
-                            if (arrOptions[j][0] == oldArrOptions[i][0]) {
-                                arrOptions[j][1] = oldArrOptions[i][1];
-                            }
-                        }
-                    }
-                }
-                // save dropdown info
-                localStorage.wwdropdown = JSON.stringify(arrOptions);
-                // bring most commonly selected to the top
-                arrOptions.sort(compareSecondColumn);
-                // bring most commonly selected to the top
+
                 // create player dropdown
                 var select = document.getElementById("playersDropdown");
                 // this is what is created
@@ -1132,15 +1193,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                     el.setAttribute("href", "#");
                     el.innerText = arrOptions[i][0];
                     select.appendChild(el);
-                    if (arrOptions[i][1] > 0) {
-                        //console.log(arrOptions[i][0] + " " + arrOptions[i][1])
-                        document.getElementById("myLink" + i).style.color =
-                            "blue";
-                        document.getElementById("myLink" + i).style.background =
-                            "lightBlue";
-                    }
                 }
-                //console.log("oldArrOptions = " + oldArrOptions.length + " - arrOptions = " + arrOptions.length)
             } // end function start()
 
             // Close the dropdown if the user clicks outside of it
@@ -1162,44 +1215,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             // functions - run when called
             //=============================================================
 
-            //=============================================================
-            // function resetNames()
-            // - gets rid of "selected" names
-            //=============================================================
-            function resetNames() {
-                // create player dropdown
-                var select = document.getElementById("playersDropdown");
-                // empty names
-                select.innerHTML = "";
-                // redo list for menu
-                // <a id="myLink1" href="#" onclick='dropSelected(this.innerText);return false;'>Graham Airey</a>
-                //
-                for (var i = 0; i < arrPlayers.length; i++) {
-                    var el = document.createElement("a");
-                    el.id = "myLink" + (i + 1);
-                    el.setAttribute(
-                        "onclick",
-                        "dropSelected(this.innerText);return false;",
-                    );
-                    el.setAttribute("href", "#");
-                    el.innerText = arrPlayers[i];
-                    select.appendChild(el);
-                }
 
-                // create fresh options array for dropdown
-                arrOptions = [];
-                for (var i = 0; i < arrPlayers.length; i++) {
-                    x = arrPlayers[i];
-                    arrOptions.push([x, 0]);
-                    // get rid of change of color on selection
-                    document.getElementById(el.id).style.color = "";
-                    document.getElementById(el.id).style.background = "";
-                }
-                // save new array
-                localStorage.wwdropdown = JSON.stringify(arrOptions);
-                // refresh page
-                location.reload();
-            }
             //=============================================================
             // function dropSelected(playerName)
             // - selects player
@@ -1211,11 +1227,11 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                     resetInput();
                 } else {
                     // retrieve dropdown info
-                    for (var k = 0; k < arrPlayers.length; k++) {
-                        if (arrPlayers[k] == playerName) {
+                    for (var k = 0; k < arrPlayersDropdown.length; k++) {
+                        if (arrPlayersDropdown[k] == playerName) {
                             //found = true;
                             //pos = k;
-                            hcp = arrHcps[k];
+                            hcp = arrHcpsDropdown[k];
                             player1hcp = Math.round(hcp);
                             player1name = playerName;
                             // change "select player to course
@@ -1952,11 +1968,194 @@ https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhja
             function showLeaderBoard() {
               //alert("leaderboard")
               document.getElementById("showleaderboard").style.display = "block"
+              getData();
             }
 
             function closeLeaderBoard() {
               //alert("leaderboard")
               document.getElementById("showleaderboard").style.display = "none"
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // data is available here
+            //getData();
+            async function getData() {
+                url =
+                    "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/sundaycsv";
+                try {
+                    const dataStream = await fetch(url);
+                    if (!dataStream.ok) {
+                        throw new Error(
+                            `Response status: ${dataStream.status}`,
+                        );
+                    }
+                    data = await dataStream.json();
+                    // don't need blank players
+                    data = data.filter(function (el) {
+                        return el.players !== "----------";
+                    });
+
+                    console.log(data)
+
+                    // sort by score, highest first
+                    //data.sort(
+                    //    (a, b) =>
+                    //       parseInt(b.playerpoints) - parseInt(a.playerpoints),
+                    //);
+                    // sort by hcp, lowest first
+                    data.sort((a, b) => parseInt(a.hcp) - parseInt(b.hcp));
+                    // sort by score, highest first
+                    data.sort(
+                        (a, b) =>
+                            parseInt(b.playerpoints) - parseInt(a.playerpoints),
+                    );
+                } catch (error) {
+                    console.error(error.message);
+                }
+                useData();
+            }
+
+            function useData() {
+                let container = document.getElementById("menu1");
+                // empty container
+                container.innerHTML = "";
+
+                //data.forEach((e, i) => (e.rank = i));
+                var ii = 0;
+                // build screen
+                console.log("data.length = " + data.length)
+                data.forEach((el, i) => {
+                    ii++;
+                    let box = document.createElement("div");
+                    box.id = "box" + i;
+                    box.className = "team";
+                    //box.style.setProperty("--i", i);
+                    let name = document.createElement("span");
+                    name.id = "name" + i;
+                    name.className = "name";
+                    name.innerHTML = el.players;
+
+                    let score = document.createElement("span");
+                    score.id = "score" + i;
+                    score.className = "score";
+                    let position = document.createElement("span");
+                    position.id = "position" + i;
+                    position.className = "position";
+                    position.innerHTML = i; //el.position;
+                    box.appendChild(position);
+                    box.appendChild(name);
+                    box.appendChild(score);
+                    //box.style.setProperty("--color", el.color);
+                    container.appendChild(box);
+                    // fade the initial view
+                    //box.style.opacity = 0.3;
+                });
+
+
+
+                j = 0;
+
+                //data.forEach((elstartx, j) => {
+                //    initialBodyUpdate(elstartx.players, j);
+                //});
+
+                k = 0;
+                // do proper display
+                data.forEach((el) => {
+                    k++;
+                    setTimeout(function () {
+                        if (el.players !== "") {
+                          console.log(el.players, el.playerpoints)
+                            bodyUpdate(el.players, el.playerpoints);
+                        }
+                    }, k * 300);
+                });
+            }
+
+            function bodyUpdate(nom, scr) {
+                let elName = nom;
+                data.find((team) => team.players === elName);
+                // now sort out positions for same scores
+                var held = 1;
+                var heldscore = 0;
+                data.forEach((elem, ind) => {
+                    if (elem.playerpoints == heldscore) {
+                        elem.position = held;
+                    } else {
+                        elem.position = ind + 1;
+                    }
+                    held = elem.position;
+                    heldscore = elem.playerpoints;
+                });
+                let AllTeams = Array.from(document.querySelectorAll(".team"));
+                var k = 0;
+                AllTeams.forEach((element) => {
+                    let elementName = element.querySelector(".name");
+                    let elementScore = element.querySelector(".score");
+                    if (elementName.innerHTML == elName) {
+                        elementScore.innerHTML = scr;
+                        let newRank = data.find(
+                            (team) => team.players === elementName.innerHTML,
+                        ).rank;
+                        // move player position
+                        // setProperty(propertyName, value)
+                        element.style.opacity = 1; //0.4;
+                        element.style.setProperty("--i", newRank);
+                        setTimeout(function () {
+                            element.style.opacity = 1;
+                        }, 800);
+                        let elementPos = element.querySelector(".position");
+                        elementPos.innerText = data.find(
+                            (team) => team.players === elementName.innerHTML,
+                        ).position;
+                    }
+                });
+            }
+
+            function initialBodyUpdate(nom, pos) {
+                document.getElementById("name" + pos).innerText = nom;
+                document.getElementById("position" + pos).innerText = "";
             }
 
         </script>
