@@ -453,7 +453,7 @@
 
                         .name {
                             //height: 50%;
-                            width: 75%;
+                            width: 30%;
                             display: flex;
                             align-items: center;
                             justify-content: left;
@@ -488,6 +488,39 @@
 
             #headerinfo {
                 padding-top:2vh;
+            }
+
+            .bird {
+                width:8%;
+                padding-right: 1vw;
+                visibility: hidden;
+            }
+
+            .birdimg {
+                src: "bird.png";
+                height:2vh;
+                width: 7vw;
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                padding-left: 1vw;
+                padding-right: 1vw;
+            }
+
+            .flag {
+                width:7%;
+                visibility: hidden;
+            }
+
+            .flagimg {
+                src: "flag.png";
+                height:2vh;
+                width: 7vw;
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                padding-left: 1vw;
+                padding-right: 1vw;
             }
         </style>
     </head>
@@ -1033,9 +1066,10 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             // highlight first player entry
             //	document.getElementById("p1name").classList.add("highlight");
             var arrCourse = [];
-            var arrHcps = [];
-            var arrPlayers = [];
-            var arrLadies = [];
+            //var arrHcps = [];
+            //var arrPlayers = [];
+            var arrBirdies = [];
+            //var arrLadies = [];
             var arrOptions = [];
             var oldArrOptions = [];
             var arrPlayersDropdown = [];
@@ -1534,14 +1568,14 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
 
             /*
 
-https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhjabhjg1JvCQg/viewform?usp=pp_url
-&entry.1433824128=p
-&entry.1064629217=h
-&entry.1119360478=d&entry.83976721=p&entry.717166862=9&entry.1175424116=6&entry.849660193=3&entry.1919564852=1&entry.1724692121=1&entry.1342174744=2&entry.758799387=3&entry.2062182607=4&entry.1930917032=5&entry.1329253100=6&entry.737258175=7&entry.1107474420=8&entry.801125525=9&entry.481613746=0&entry.375771739=11&entry.515491474=12&entry.153870929=13&entry.534588764=14&entry.1709130776=15&entry.1199544885=16&entry.1903245588=17&entry.1737150484=18&entry.1766971895=1&entry.1446347715=2&entry.1043639386=3&entry.1058489368=4&entry.984229340=5&entry.888962172=6&entry.662079754=7&entry.857756573=8&entry.213108632=9&entry.965823425=10&entry.1721064168=11&entry.343171143=12&entry.32888434=13&entry.1203648652=14&entry.1811069542=15&entry.410870339=16&entry.488847840=17&entry.2086486082=17
+            https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhjabhjg1JvCQg/viewform?usp=pp_url
+            &entry.1433824128=p
+            &entry.1064629217=h
+            &entry.1119360478=d&entry.83976721=p&entry.717166862=9&entry.1175424116=6&entry.849660193=3&entry.1919564852=1&entry.1724692121=1&entry.1342174744=2&entry.758799387=3&entry.2062182607=4&entry.1930917032=5&entry.1329253100=6&entry.737258175=7&entry.1107474420=8&entry.801125525=9&entry.481613746=0&entry.375771739=11&entry.515491474=12&entry.153870929=13&entry.534588764=14&entry.1709130776=15&entry.1199544885=16&entry.1903245588=17&entry.1737150484=18&entry.1766971895=1&entry.1446347715=2&entry.1043639386=3&entry.1058489368=4&entry.984229340=5&entry.888962172=6&entry.662079754=7&entry.857756573=8&entry.213108632=9&entry.965823425=10&entry.1721064168=11&entry.343171143=12&entry.32888434=13&entry.1203648652=14&entry.1811069542=15&entry.410870339=16&entry.488847840=17&entry.2086486082=17
 
 
 
-*/
+            */
 
             //=============================================================
             // function submitForm()
@@ -2054,8 +2088,77 @@ https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhja
                     position.id = "position" + i;
                     position.className = "position";
                     position.innerHTML = i; //el.position;
+
+                    let bird1 = document.createElement("span");
+                    bird1.id = "bird1" + i;
+                    bird1.className = "bird";
+
+                    let bird2 = document.createElement("span");
+                    bird2.id = "bird2" + i;
+                    bird2.className = "bird";
+
+                    let bird3 = document.createElement("span");
+                    bird3.id = "bird3" + i;
+                    bird3.className = "bird";
+
+                    let bird4 = document.createElement("span");
+                    bird4.id = "bird4" + i;
+                    bird4.className = "bird";
+
+                    let bird5 = document.createElement("span");
+                    bird5.id = "bird5" + i;
+                    bird5.className = "bird";
+
+                    let birdimg1 = document.createElement("img");
+                    birdimg1.id = "birdimg1" + i;
+                    birdimg1.className = "birdimg";
+                    birdimg1.src = "bird.png";
+
+                    let birdimg2 = document.createElement("img");
+                    birdimg2.id = "birdimg2" + i;
+                    birdimg2.className = "birdimg";
+                    birdimg2.src = "bird.png";
+
+                    let birdimg3 = document.createElement("img");
+                    birdimg3.id = "birdimg3" + i;
+                    birdimg3.className = "birdimg";
+                    birdimg3.src = "bird.png";
+
+                    let birdimg4 = document.createElement("img");
+                    birdimg4.id = "birdimg4" + i;
+                    birdimg4.className = "birdimg";
+                    birdimg4.src = "bird.png";
+
+                    let birdimg5 = document.createElement("img");
+                    birdimg5.id = "birdimg5" + i;
+                    birdimg5.className = "birdimg";
+                    birdimg5.src = "bird.png";
+
+                    let flag = document.createElement("span");
+                    flag.id = "flag" + i;
+                    flag.className = "flag";
+
+                    let flagimg = document.createElement("img");
+                    flagimg.id = "flagimg" + i;
+                    flagimg.className = "flagimg";
+                    flagimg.src = "flag.png";
+
+                    bird1.appendChild(birdimg1);
+                    bird2.appendChild(birdimg2);
+                    bird3.appendChild(birdimg3);
+                    bird4.appendChild(birdimg4);
+                    bird5.appendChild(birdimg5);
+
+                    flag.appendChild(flagimg);
+
                     box.appendChild(position);
                     box.appendChild(name);
+                    box.appendChild(bird1);
+                    box.appendChild(bird2);
+                    box.appendChild(bird3);
+                    box.appendChild(bird4);
+                    box.appendChild(bird5);
+                    box.appendChild(flag);
                     box.appendChild(scores);
                     //box.style.setProperty("--color", el.color);
                     container.appendChild(box);
@@ -2099,18 +2202,19 @@ https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhja
                 });
                 let AllTeams = Array.from(document.querySelectorAll(".team"));
                 var k = 0;
-                AllTeams.forEach((element) => {
+                AllTeams.forEach((element, n) => {
                     let elementName = element.querySelector(".name");
                     let elementScore = element.querySelector(".scores");
                     if (elementName.innerHTML == elName) {
                         elementScore.innerHTML = scr;
+
                         let newRank = data.find(
                             (team) => team.players === elementName.innerHTML,
                         ).rank;
                         // move player position
                         // setProperty(propertyName, value)
                         element.style.opacity = 1; //0.4;
-                        element.style.setProperty("--i", newRank);
+                        //element.style.setProperty("--i", newRank);
                         setTimeout(function () {
                             element.style.opacity = 1;
                         }, 800);
@@ -2118,6 +2222,45 @@ https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhja
                         elementPos.innerText = data.find(
                             (team) => team.players === elementName.innerHTML,
                         ).position;
+
+                        //console.log(
+                        //    "birdnum = " +
+                        //        data.find(
+                        //            (team) =>
+                        //                team.players === elementName.innerHTML,
+                        //        ).bird,
+                        //);
+
+                        birdnum = data.find(
+                            (team) => team.players === elementName.innerHTML,
+                        ).bird;
+
+                        console.log(" = bird1" + birdnum);
+                        if (birdnum > 0) {
+                            document.getElementById(
+                                "bird1" + n,
+                            ).style.visibility = "visible";
+                        }
+                        if (birdnum > 1) {
+                            document.getElementById(
+                                "bird2" + n,
+                            ).style.visibility = "visible";
+                        }
+                        if (birdnum > 2) {
+                            document.getElementById(
+                                "bird3" + n,
+                            ).style.visibility = "visible";
+                        }
+                        if (birdnum > 3) {
+                            document.getElementById(
+                                "bird4" + n,
+                            ).style.visibility = "visible";
+                        }
+                        if (birdnum > 4) {
+                            document.getElementById(
+                                "bird5" + n,
+                            ).style.visibility = "visible";
+                        }
                     }
                 });
             }
