@@ -2057,23 +2057,26 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                     data = await dataStream.json();
                     // don't need blank players
                     data = data.filter(function (el) {
-                        return el.players !== "----------";
+                        return el.players !== "";
                     });
 
-                    console.log(data);
-
-                    // sort by score, highest first
-                    //data.sort(
-                    //    (a, b) =>
-                    //       parseInt(b.playerpoints) - parseInt(a.playerpoints),
-                    //);
-                    // sort by hcp, lowest first
-                    data.sort((a, b) => parseInt(a.hcp) - parseInt(b.hcp));
-                    // sort by score, highest first
-                    data.sort(
-                        (a, b) =>
-                            parseInt(b.playerpoints) - parseInt(a.playerpoints),
-                    );
+                    // if no results show text
+                    // else
+                    // show results
+                    if (data.length == 0) {
+                        document.getElementById("headerinfo").innerText =
+                            "no results";
+                    } else {
+                        console.log(data);
+                        // sort by hcp, lowest first
+                        data.sort((a, b) => parseInt(a.hcp) - parseInt(b.hcp));
+                        // sort by score, highest first
+                        data.sort(
+                            (a, b) =>
+                                parseInt(b.playerpoints) -
+                                parseInt(a.playerpoints),
+                        );
+                    }
                 } catch (error) {
                     console.error(error.message);
                 }
