@@ -14,1045 +14,1445 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <style>
 
-                        	/* icon color #bef081 */
-
-                        	* {
-                        		margin: 0;
-                        		padding: 0;
-                        		box-sizing: border-box;
-                        	}
-
-                        	html {
-                        		//height: 100vh;
-                        		width: 100vw;
-                        	}
-
-                        	body {
-                        	   overflow/ hidden;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		font-size: 3vh;
-                        		background: black;
-                        		height: 100%;
-                        		width: 100%;
-                        	}
-                        	/* dropdown */
-
-                        	#dropbtn {
-                        		color: white;
-                        		background: black;
-                        		height: 100%;
-                          width:80%;
-                        		display: flex;
-                        		justify-content: center;
-                        		align-items: center;
-                        		border-radius: 10px;
-                          border: 5px solid gray;
-                        	}
-
-                         #leaderboard {
-                        		color: white;
-                        		background: dodgerBlue;
-                        		height: 100%;
-                        		display: flex;
-                        		justify-content: center;
-                        		align-items: center;
-                        		//border: 1px solid Gray;
-                          //border-radius: 10px;
-                          width:20%;
-                          margin-left: 0.5%;
-                          //margin-top:1%;
-                        	}
-
-
-                         #showleaderboard {
-                             position: fixed;
-                             top: 0;
-                             left:0;
-                             height: 100vh;
-                             width: 100vw;
-                             background: dodgerBlue;
-                             display:none;
-                         }
-
-
-                        	.dropdown {
-                        		position: relative;
-                        		display: inline-block;
-                        	}
-
-                        	.dropdown-content {
-                        		display: none;
-                        		position: absolute;
-                        		background-color: black;
-                        		min-width: 160px;
-                        		overflow: auto;
-                        		z-index: 1;
-                        		border-radius: 5px;
-                        		box-shadow: 10px 10px 25px black;
-                        		max-height: 70vh;
-                        	}
-
-                        	.dropdown-content a {
-                        		color: black;
-                        		font-size: 4vh;
-                        		background: whiteSmoke;
-                        		padding: 12px 16px;
-                        		text-decoration: none;
-                        		display: block;
-                        		border: 1px solid gray;
-                        		border-radius: 5px;
-                        	}
-
-                        	.show {
-                        		display: block;
-                        	}
-                        	/* end of dropdown */
-
-
-                        	/* highlights selected player */
-
-                        	.highlight {
-                        		color: white;
-                        		background: dodgerBlue;
-                        	}
-
-                        	.scorelow {
-                        		font-size: 4vh;
-                        		color: lime;
-                        		display: inline-block;
-                        		border: 1px solid Gray;
-                        		text-align: center;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		border-radius: 5px;
-                        	}
-                        	/* highlights keyboard score pressed */
-
-                        	.scorehigh {
-                        		font-size: 4vh;
-                        		color: white;
-                        		display: inline-block;
-                        		border: 5px solid Gray;
-                        		text-align: center;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		border-radius: 5px;
-                        		background: dodgerBlue;
-                        	}
-
-                        	#info {
-                        		display: none;
-                        		overflow: auto;
-                        		position: absolute;
-                        		top: 0;
-                        		left: 0;
-                        		height: 100%;
-                        		width: 100%;
-                        		color: white;
-                        		background-color: black;
-                        		padding-left: 1px;
-                        		padding-right: 1px;
-                        		padding-bottom: 1px;
-
-                        	}
-
-                        	#popuppanel {
-                        		background-color: #ddd;
-                        		font-size: 3vh;
-                        		display: inline-block;
-                        		border-radius: 3px;
-                        		border: 1px solid #aaa;
-                        		padding: 10px;
-                        		margin: 5vw;
-                        		text-align: center;
-                        		width: 80vw;
-
-                        		cursor: pointer;
-                        	}
-                        	/* hide forms */
-
-                        	#my-response-iframe,
-                        	#my-form {
-                        		display: none;
-                        	}
-                        	/* */
-
-                        	.child-one {
-                        		height: 7vh;
-                        		font-size: 3vh;
-                        		//border-radius: 10px;
-                          //border: 5px solid gray;
-                          display: flex;
-                        	}
-
-
-                        	/* player names */
-
-                        	#p1name {
-                        		font-size: 3vh;
-                        		display: inline-block;
-                        		width: calc(100% / 3 * 2);
-                        		height: 8vh;
-                        		line-height: 8vh;
-                        		border: 1px solid Gray;
-                        		text-align: center;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		border-radius: 5px;
-                        	}
-                        	/* player scores */
-
-                        	#p1score {
-                        		font-size: 4vh;
-                        		display: inline-block;
-                        		width: calc(100% / 3);
-                        		height: 8vh; //calc(100% / 9);
-                        		line-height: 8vh;
-                        		padding-left: 5%;
-                        		padding-right: 5%;
-                        		border: 1px solid Gray;
-                        		text-align: center;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		border-radius: 5px;
-                        	}
-                        	/* default "keyboard" */
-
-                        	.small {
-                        		font-size: 4vh;
-                          color: lime;
-                        		display: inline-block;
-                        		height: 7vh;
-                        		line-height: 7vh;
-                        		padding-left: 20%;
-                        		padding-right: 20%;
-                        		border: 1px solid Gray;
-                        		text-align: center;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		border-radius: 5px;
-                        	}
-                        	/* banner hole details */
-
-                        	#holedetails {
-                        		color: white;
-                        		background: black;
-                        		font-size: 3vh;
-                        		display: inline-block;
-                        		width: 100%;
-                        		height: 5vh;
-                        		line-height: 5vh;
-                        		padding-left: 5%;
-                        		padding-right: 5%;
-                        		border: 1px solid Gray;
-                        		text-align: center;
-                        		font-family: Arial, Helvetica, sans-serif;
-                        		border-radius: 5px;
-                        	}
-
-
-
-                        	#player4ballplayer {
-                        		width: 30%;
-                        		padding: 1vw;
-
-                        	}
-
-                        	#player4ballname {
-                        		width: 55%;
-                        		padding: 1vw;
-
-                        	}
-
-                        	#player4ballhcp {
-                        		width: 15%;
-                        		padding: 1vw;
-
-                        	}
-
-                        	.submit {
-                        		font-size: 100%;
-                        		color: white;
-                        		//background: dodgerBlue;
-                        		height: 100%;
-                        		line-height: 10vh;
-                        		text-align: center;
-                        	}
-
-
-
-
-                        	#sending {
-                        		position: relative;
-                        		background: black;
-                        	}
-
-
-
-                            #front9 {
-                              color:  white;
-                              //height:  100vh;
-                            }
-
-                            tr {
-                                text-align: center;
-                            }
-                            td {
-                                width: calc(100vw/6);
-                            }
-                            .head {
-                                font-size: 2vh;
-                            }
-
-                            #hole1,
-                            #hole2,
-                            #hole3,
-                            #hole4,
-                            #hole5,
-                            #hole6,
-                            #hole7,
-                            #hole8,
-                            #hole9,
-                            #hole10,
-                            #hole11,
-                            #hole12,
-                            #hole13,
-                            #hole14,
-                            #hole15,
-                            #hole16,
-                            #hole17,
-                            #hole18 {
-                                color: cyan;
-                            }
-
-                            #front9points ,
-                            #back9points {
-                                border: 1px solid cyan;
-                            }
-
-
-                            #score1,
-                            #score2,
-                            #score3,
-                            #score4,
-                            #score5,
-                            #score6,
-                            #score7,
-                            #score8,
-                            #score9 {
-                                //margin: 3vh;
-                                width: calc(100vw / 3);
-                                color: lime;
-                                border-radius: 10px;
-                                border: 5px solid gray;
-                                height:12vh;
-                                font-size: 10vw;
-
-                            }
-
-                            #page {
-
-                            }
-
-                           #acceptpanel {
-                               display: none;
-                               position: fixed;
-                               //top: 20vh;
-
-                               bottom: 5vh;
-                               //left: 2vw;
-                               //right: 20vw;
-
-                             border: 1px silver solid;
-                               background: black;
-                               color: white;
-                               font-size: 4vw;
-                               padding: 5vw;
-                               border-radius: 5px;
-                               text-align: center;
-
-                               margin-left: 14vw;
-                               //margin-right: 5vw;
-                               //margin: auto;
-                               //width: 80vw;
-                               //height: 40vh;
-
-                               //opacity: 1;
-
-                           }
-
-                        .button1 {
-                            width: 25vw;
-                            height: 10vh;
-                            text-align: center;
-                            //padding: 2vw;
-                           font-size: 4vw;
-                            border-radius: 5px;
-                            //margin: 5vw;
-                            background: silver;
-                        }
-
-                        .spacer1vh {
-                            //height: 2vh;
-                            display: flex;
-                            padding: 1vh;
-                        }
-
-                        #podium {
-                            height: 5vh;
-                            width: 5vh;
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        /* for each day */
-                        #menu1 {
-                            text-align: center;
-                            color: white;
-                            font-size: 8vh;
-                            height: auto;
-                        }
-
-                        .team {
-                            //position: absolute;
-                            width: 90%;
-                            height: 5vh;
-                            margin-left: 5%;
-                            margin-top: 2%;
-                            margin-bottom: 2%;
-                            background: rgba(105, 105, 105, 0.8);
-                            box-shadow: 0 3px 5px black;
-                            display: flex;
-                            align-items: center;
-                            transition-property: top;
-                            transition-duration: 1500ms;
-                            border-radius: 10px;
-                            transition-timing-function: cubic-bezier(
-                                0.68,
-                                -0.55,
-                                0.265,
-                                1.55
-                            );
-                            border: 4px solid rgba(255, 255, 255, 0.3);
-                            background-clip: padding-box;
-                        }
-
-                        .name {
-                            //height: 50%;
-                            width: 30%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: left;
-                            font-size: 1.3rem;
-                            color: white;
-                            font-weight: 400;
-                            text-transform: capitalize;
-                        }
-
-                        .scores {
-                            //height: 50%;
-                            width: 12%;
-                            font-size: 1.3rem;
-                            color: white;
-                            font-weight: 400;
-                            display: flex;
-                            text-align: center;
-                            justify-content: center;
-                        }
-
-                        .position {
-                            //height: 50%;
-                            width: 12%;
-                            font-size: 1.3rem;
-                            color: white;
-                            font-weight: 400;
-                            display: flex;
-                            text-align: center;
-                            justify-content: center;
-                        }
-
-
-            #headerinfo {
-                padding-top: 2vh;
-                padding-bottom: 1vh;
-                color: white;
-                font-size: 7vw;
-                display: flex;
-                text-align: center;
-                justify-content: center;
-            }
-
-            #footerinfo {
-                position: absolute;
-                    bottom: 200px;
-                    width:100%;
-                color: white;
-                font-size: 4vw;
-                display: flex;
-                text-align: center;
-                justify-content: center;
-            }
-
-            .bird {
-                width:8%;
-                padding-right: 1vw;
-                visibility: hidden;
-            }
-
-            .birdimg {
-                src: "bird.png";
-                height:2vh;
-                width: 7vw;
-                display: flex;
-                text-align: center;
-                justify-content: center;
-                padding-left: 1vw;
-                padding-right: 1vw;
-            }
-
-            .flag {
-                width:7%;
-                visibility: hidden;
-            }
-
-            .flagimg {
-                src: "flag.png";
-                height:2vh;
-                width: 7vw;
-                display: flex;
-                text-align: center;
-                justify-content: center;
-                padding-left: 1vw;
-                padding-right: 1vw;
-            }
+                                                	/* icon color #bef081 */
+
+                                                	* {
+                                                		margin: 0;
+                                                		padding: 0;
+                                                		box-sizing: border-box;
+                                                	}
+
+                                                	html {
+                                                		//height: 100vh;
+                                                		width: 100vw;
+                                                	}
+
+                                                	body {
+                                                	   overflow: hidden;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		font-size: 3vh;
+                                                		background: black;
+                                                		height: 100%;
+                                                		width: 100%;
+                                                	}
+                                                	/* dropdown */
+
+                                                	#dropbtn {
+                                                		color: white;
+                                                		background: black;
+                                                		height: 100%;
+                                                  width:80%;
+                                                		display: flex;
+                                                		justify-content: center;
+                                                		align-items: center;
+                                                		border-radius: 10px;
+                                                  border: 5px solid gray;
+                                                	}
+
+                                                 #iconpageone, #iconpagetwo, #iconpagethree {
+                                                		color: white;
+                                                		background: dodgerBlue;
+                                                		height: 100%;
+                                                		display: flex;
+                                                		justify-content: center;
+                                                		align-items: center;
+                                                		//border: 1px solid Gray;
+                                                  //border-radius: 10px;
+                                                  width:20%;
+                                                  margin-left: 0.5%;
+                                                  //margin-top:1%;
+                                                	}
+
+
+
+                                                 #headerpageone, #headerpagetwo, #headerpagethree {
+                                                	color: white;
+                                               		background: black;
+                                               		height: 100%;
+                                                 width:80%;
+                                               		display: flex;
+                                               		justify-content: center;
+                                               		align-items: center;
+                                               		//border-radius: 10px;
+                                                 //border: 5px solid gray;
+                                                 }
+
+
+                                                 #xpageone {
+                                                     position: fixed;
+                                                     top: 0;
+                                                     left:0;
+                                                     height: 100vh;
+                                                     width: 100vw;
+                                                     background: dodgerBlue;
+                                                     display:none;
+                                                 }
+
+                                                 #pagetwo {
+                                                     position: fixed;
+                                                     top: 0;
+                                                     left:0;
+                                                     height: 100vh;
+                                                     width: 100vw;
+                                                     background: dodgerBlue;
+                                                     display:none;
+                                                 }
+
+                                                 #pagethree {
+                                                     position: fixed;
+                                                     top: 0;
+                                                     left:0;
+                                                     height: 100vh;
+                                                     width: 100vw;
+                                                     background: dodgerBlue;
+                                                     color: white;
+                                                     display:none;
+                                                 }
+
+                                                	.dropdown, .statsdropdown {
+                                                		position: relative;
+                                                		display: inline-block;
+                                                	}
+
+                                                	.dropdown-content, .statsdropdown-content {
+                                                   		display: none;
+                                                		position: absolute;
+                                                		background-color: black;
+                                                		min-width: 160px;
+                                                		overflow: auto;
+                                                		z-index: 1;
+                                                		border-radius: 5px;
+                                                		box-shadow: 10px 10px 25px black;
+                                                		max-height: 90vh;
+                                                	}
+
+                                                	.dropdown-content a, .statsdropdown-content a {
+                                                		color: black;
+                                                		font-size: 4vh;
+                                                		background: whiteSmoke;
+                                                		padding: 12px 16px;
+                                                		text-decoration: none;
+                                                		display: block;
+                                                		border: 1px solid gray;
+                                                		border-radius: 5px;
+                                                	}
+
+                                                	.show {
+                                                		display: block;
+                                                	}
+                                                	/* end of dropdown */
+
+
+                                                	/* highlights selected player */
+
+                                                	.highlight {
+                                                		color: white;
+                                                		background: dodgerBlue;
+                                                	}
+
+                                                	.scorelow {
+                                                		font-size: 4vh;
+                                                		color: lime;
+                                                		display: inline-block;
+                                                		border: 1px solid Gray;
+                                                		text-align: center;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		border-radius: 5px;
+                                                	}
+                                                	/* highlights keyboard score pressed */
+
+                                                	.scorehigh {
+                                                		font-size: 4vh;
+                                                		color: white;
+                                                		display: inline-block;
+                                                		border: 5px solid Gray;
+                                                		text-align: center;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		border-radius: 5px;
+                                                		background: dodgerBlue;
+                                                	}
+
+                                                 #createleaderboarditems {
+                                                     display: block;
+                                                 }
+
+
+
+
+
+                                                	#info {
+                                                		display: none;
+                                                		overflow: auto;
+                                                		position: absolute;
+                                                		top: 0;
+                                                		left: 0;
+                                                		height: 100%;
+                                                		width: 100%;
+                                                		color: white;
+                                                		background-color: black;
+                                                		padding-left: 1px;
+                                                		padding-right: 1px;
+                                                		padding-bottom: 1px;
+
+                                                	}
+
+                                                	#popuppanel {
+                                                		background-color: #ddd;
+                                                		font-size: 3vh;
+                                                		display: inline-block;
+                                                		border-radius: 3px;
+                                                		border: 1px solid #aaa;
+                                                		padding: 10px;
+                                                		margin: 5vw;
+                                                		text-align: center;
+                                                		width: 80vw;
+
+                                                		cursor: pointer;
+                                                	}
+                                                	/* hide forms */
+
+                                                	#my-response-iframe,
+                                                	#my-form {
+                                                		display: none;
+                                                	}
+                                                	/* */
+
+                                                	.child-one {
+                                                		height: 7vh;
+                                                		font-size: 3vh;
+
+                                                  display: flex;
+                                                	}
+
+                                                 .child-two {
+                                                		height: 7vh;
+                                                		font-size: 3vh;
+            flex-direction: row;
+                                                  display: flex;
+                                                  //flex-wrap: wrap;
+                                                	}
+
+                                                 .child-three {
+                                                		height: 7vh;
+                                                		font-size: 3vh;
+
+                                                  display: flex;
+                                                  //flex-wrap: wrap;
+                                                	}
+
+
+                                                	/* player names */
+
+                                                	#p1name {
+                                                		font-size: 3vh;
+                                                		display: inline-block;
+                                                		width: calc(100% / 3 * 2);
+                                                		height: 8vh;
+                                                		line-height: 8vh;
+                                                		border: 1px solid Gray;
+                                                		text-align: center;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		border-radius: 5px;
+                                                	}
+                                                	/* player scores */
+
+                                                	#p1score {
+                                                		font-size: 4vh;
+                                                		display: inline-block;
+                                                		width: calc(100% / 3);
+                                                		height: 8vh; //calc(100% / 9);
+                                                		line-height: 8vh;
+                                                		padding-left: 5%;
+                                                		padding-right: 5%;
+                                                		border: 1px solid Gray;
+                                                		text-align: center;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		border-radius: 5px;
+                                                	}
+                                                	/* default "keyboard" */
+
+                                                	.small {
+                                                		font-size: 4vh;
+                                                  color: lime;
+                                                		display: inline-block;
+                                                		height: 7vh;
+                                                		line-height: 7vh;
+                                                		padding-left: 20%;
+                                                		padding-right: 20%;
+                                                		border: 1px solid Gray;
+                                                		text-align: center;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		border-radius: 5px;
+                                                	}
+                                                	/* banner hole details */
+
+                                                	#holedetails {
+                                                		color: white;
+                                                		background: black;
+                                                		font-size: 3vh;
+                                                		display: inline-block;
+                                                		width: 100%;
+                                                		height: 5vh;
+                                                		line-height: 5vh;
+                                                		padding-left: 5%;
+                                                		padding-right: 5%;
+                                                		border: 1px solid Gray;
+                                                		text-align: center;
+                                                		font-family: Arial, Helvetica, sans-serif;
+                                                		border-radius: 5px;
+                                                	}
+
+
+
+                                                	#player4ballplayer {
+                                                		width: 30%;
+                                                		padding: 1vw;
+
+                                                	}
+
+                                                	#player4ballname {
+                                                		width: 55%;
+                                                		padding: 1vw;
+
+                                                	}
+
+                                                	#player4ballhcp {
+                                                		width: 15%;
+                                                		padding: 1vw;
+
+                                                	}
+
+                                                	.submit {
+                                                		font-size: 100%;
+                                                		color: white;
+                                                		//background: dodgerBlue;
+                                                		height: 100%;
+                                                		line-height: 10vh;
+                                                		text-align: center;
+                                                	}
+
+
+
+
+                                                	#sending {
+                                                		position: relative;
+                                                		background: black;
+                                                	}
+
+
+
+                                                    #front9 {
+                                                      color:  white;
+                                                      //height:  100vh;
+                                                    }
+
+                                                    tr {
+                                                        text-align: center;
+                                                    }
+                                                    td {
+                                                        width: calc(100vw/6);
+                                                    }
+                                                    .head {
+                                                        font-size: 2vh;
+                                                    }
+
+                                                    #hole1,
+                                                    #hole2,
+                                                    #hole3,
+                                                    #hole4,
+                                                    #hole5,
+                                                    #hole6,
+                                                    #hole7,
+                                                    #hole8,
+                                                    #hole9,
+                                                    #hole10,
+                                                    #hole11,
+                                                    #hole12,
+                                                    #hole13,
+                                                    #hole14,
+                                                    #hole15,
+                                                    #hole16,
+                                                    #hole17,
+                                                    #hole18 {
+                                                        color: cyan;
+                                                    }
+
+                                                    #front9points ,
+                                                    #back9points {
+                                                        border: 1px solid cyan;
+                                                    }
+
+
+                                                    #score1,
+                                                    #score2,
+                                                    #score3,
+                                                    #score4,
+                                                    #score5,
+                                                    #score6,
+                                                    #score7,
+                                                    #score8,
+                                                    #score9 {
+                                                        //margin: 3vh;
+                                                        width: calc(100vw / 3);
+                                                        color: lime;
+                                                        border-radius: 10px;
+                                                        border: 5px solid gray;
+                                                        height:12vh;
+                                                        font-size: 10vw;
+
+                                                    }
+
+                                                    #pageone {
+
+                                                    }
+
+                                                   #acceptpanel {
+                                                       display: none;
+                                                       position: fixed;
+                                                       //top: 20vh;
+
+                                                       bottom: 5vh;
+                                                       //left: 2vw;
+                                                       //right: 20vw;
+
+                                                     border: 1px silver solid;
+                                                       background: black;
+                                                       color: white;
+                                                       font-size: 4vw;
+                                                       padding: 5vw;
+                                                       border-radius: 5px;
+                                                       text-align: center;
+
+                                                       margin-left: 14vw;
+                                                       //margin-right: 5vw;
+                                                       //margin: auto;
+                                                       //width: 80vw;
+                                                       //height: 40vh;
+
+                                                       //opacity: 1;
+
+                                                   }
+
+                                                .button1 {
+                                                    width: 25vw;
+                                                    height: 10vh;
+                                                    text-align: center;
+                                                    //padding: 2vw;
+                                                   font-size: 4vw;
+                                                    border-radius: 5px;
+                                                    //margin: 5vw;
+                                                    background: silver;
+                                                }
+
+                                                .spacer1vh {
+                                                    //height: 2vh;
+                                                    display: flex;
+                                                    padding: 1vh;
+                                                }
+
+                                                #podium, #home, #stat {
+                                                    height: 5vh;
+                                                    width: 5vh;
+                                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                /* for each day */
+                                                #createleaderboarditems {
+                                                    text-align: center;
+                                                    color: white;
+                                                    font-size: 8vh;
+                                                    height: auto;
+                                                }
+
+                                                .team {
+                                                    //position: absolute;
+                                                    width: 90%;
+                                                    height: 5vh;
+                                                    margin-left: 5%;
+                                                    margin-top: 2%;
+                                                    margin-bottom: 2%;
+                                                    background: rgba(105, 105, 105, 0.8);
+                                                    box-shadow: 0 3px 5px black;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    transition-property: top;
+                                                    transition-duration: 1500ms;
+                                                    border-radius: 10px;
+                                                    transition-timing-function: cubic-bezier(
+                                                        0.68,
+                                                        -0.55,
+                                                        0.265,
+                                                        1.55
+                                                    );
+                                                    border: 4px solid rgba(255, 255, 255, 0.3);
+                                                    background-clip: padding-box;
+                                                }
+
+                                                .name {
+                                                    //height: 50%;
+                                                    width: 30%;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: left;
+                                                    font-size: 1.3rem;
+                                                    color: white;
+                                                    font-weight: 400;
+                                                    text-transform: capitalize;
+                                                }
+
+                                                .scores {
+                                                    //height: 50%;
+                                                    width: 12%;
+                                                    font-size: 1.3rem;
+                                                    color: white;
+                                                    font-weight: 400;
+                                                    display: flex;
+                                                    text-align: center;
+                                                    justify-content: center;
+                                                }
+
+                                                .position {
+                                                    //height: 50%;
+                                                    width: 12%;
+                                                    font-size: 1.3rem;
+                                                    color: white;
+                                                    font-weight: 400;
+                                                    display: flex;
+                                                    text-align: center;
+                                                    justify-content: center;
+                                                }
+
+
+                                    #headerinfo {
+                                        padding-top: 2vh;
+                                        padding-bottom: 1vh;
+                                        color: white;
+                                        font-size: 7vw;
+                                        display: flex;
+                                        text-align: center;
+                                        justify-content: center;
+
+
+
+
+
+                        width: 80%;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    }
+
+                                    #footerinfo, #footerstats {
+                                        position: absolute;
+                                            bottom: 200px;
+                                            width:100%;
+                                        color: white;
+                                        font-size: 4vw;
+                                        display: flex;
+                                        text-align: center;
+                                        justify-content: center;
+                                    }
+
+                                    .bird {
+                                        width:8%;
+                                        padding-right: 1vw;
+                                        visibility: hidden;
+                                    }
+
+                                    .birdimg {
+                                        src: "bird.png";
+                                        height:2vh;
+                                        width: 7vw;
+                                        display: flex;
+                                        text-align: center;
+                                        justify-content: center;
+                                        padding-left: 1vw;
+                                        padding-right: 1vw;
+                                    }
+
+                                    .flag {
+                                        width:7%;
+                                        visibility: hidden;
+                                    }
+
+                                    .flagimg {
+                                        src: "flag.png";
+                                        height:2vh;
+                                        width: 7vw;
+                                        display: flex;
+                                        text-align: center;
+                                        justify-content: center;
+                                        padding-left: 1vw;
+                                        padding-right: 1vw;
+                                    }
+
+                                    #statsinfo {
+                                      width: 300px;
+                                      height: 300px;
+                                      border: 1px solid cyan;
+                                      display: flex;
+                                    }
+
+                                    #statsinfo div {
+                                        border: 1px sold yellow;
+                                      flex: 1;
+                                    }
+
+
+
+
+
+
+
+
+
+
+
+
+                                    .table_component {
+                                        overflow: auto;
+                                        width: 100%;
+                                    }
+
+                                    .table_component table {
+                                        //border: 1px solid #dededf;
+                                        height: 100%;
+                                        width: 100%;
+                                        table-layout: fixed;
+                                        border-collapse: collapse;
+                                        border-spacing: 1px;
+                                        text-align: center;
+                                        font-size: 3vw;
+                                    }
+
+                                    .table_component caption {
+                                        caption-side: top;
+                                        text-align: left;
+                                    }
+
+                                    .table_component th {
+                                        //border: 1px solid indigo;
+                                        background-color: #1589FF;
+                                        color: cyan; //white;
+                                        padding: 5px;
+                                    }
+
+                                    .table_component td {
+                                        //border: 1px solid indigo;
+                                        background-color: dodgerBlue;
+                                        color: white;
+                                        padding: 5px;
+                                        //border: 1px solid silver;
+                                    }
+
+                                    .table_component table tbody tr:nth-of-type(even) > * {
+                                      background: #1589FF;
+                                    }
+
+                                    #toptr {
+                                        color: cyan;
+                                    }
         </style>
     </head>
-
     <body>
-        <div id="page">
+        <div id="pageone">
+            <!-- scoreentry -->
             <div class="child-one">
                 <div onclick="toggleDropdown()" class="dropbtn" id="dropbtn">
                     select player
                 </div>
-                <div id="leaderboard" onclick="showLeaderBoard()">
+                <div id="iconpageone" onclick="showPageTwo()">
                     <img id="podium" src="podium.png" alt="" />
                 </div>
                 <div id="playersDropdown" class="dropdown-content"></div>
             </div>
+        </div>
 
-            <div id="showleaderboard" onclick="closeLeaderBoard()">
-                <div id="headerinfo">Leaderboard</div>
-                <div id="footerinfo">tap to exit</div>
-                <div id="menu1"></div>
+        <div id="pagetwo">
+            <!-- leaderboard -->
+            <div class="child-two">
+                <div id="headerpagetwo">Leaderboard</div>
+
+                <!-- icon link to stats -->
+                <div id="iconpagetwo" onclick="showPageThree()">
+                    <img id="stat" src="stat.png" width="90vw" />
+                </div>
+
+                <div id="footerinfo" onclick="closeLeaderBoard()">
+                    <img src="exit.png" width="90vw" />
+                </div>
             </div>
+            <div id="createleaderboarditems">yyyyyyyyyyyy</div>
+        </div>
+
+        <div id="pagethree">
+            <!-- stats -->
+            <div class="child-three">
+                <div id="headerpagethree">no player selected</div>
+
+                <div id="iconpagethree" onclick="showPageOne()">
+                    <img id="home" src="home.png" width="90vw" />
+                </div>
+            </div>
+            <div class="table_component" role="region" tabindex="0">
+                <table>
+                    <thead>
+                        <tr id="toptr">
+                            <th>Hole</th>
+                            <th>par</th>
+                            <th>si</th>
+                            <th>strokes</th>
+                            <th>points</th>
+                            <th>%over</th>
+                            <th>perf</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="a1"></td>
+                            <td id="b1"></td>
+                            <td id="c1"></td>
+                            <td id="d1"></td>
+                            <td id="e1"></td>
+                            <td id="f1"></td>
+                            <td id="g1"></td>
+                        </tr>
+                        <tr>
+                            <td id="a2"></td>
+                            <td id="b2"></td>
+                            <td id="c2"></td>
+                            <td id="d2"></td>
+                            <td id="e2"></td>
+                            <td id="f2"></td>
+                            <td id="g2"></td>
+                        </tr>
+                        <tr>
+                            <td id="a3"></td>
+                            <td id="b3"></td>
+                            <td id="c3"></td>
+                            <td id="d3"></td>
+                            <td id="e3"></td>
+                            <td id="f3"></td>
+                            <td id="g3"></td>
+                        </tr>
+                        <tr>
+                            <td id="a4"></td>
+                            <td id="b4"></td>
+                            <td id="c4"></td>
+                            <td id="d4"></td>
+                            <td id="e4"></td>
+                            <td id="f4"></td>
+                            <td id="g4"></td>
+                        </tr>
+                        <tr>
+                            <td id="a5"></td>
+                            <td id="b5"></td>
+                            <td id="c5"></td>
+                            <td id="d5"></td>
+                            <td id="e5"></td>
+                            <td id="f5"></td>
+                            <td id="g5"></td>
+                        </tr>
+                        <tr>
+                            <td id="a6"></td>
+                            <td id="b6"></td>
+                            <td id="c6"></td>
+                            <td id="d6"></td>
+                            <td id="e6"></td>
+                            <td id="f6"></td>
+                            <td id="g6"></td>
+                        </tr>
+                        <tr>
+                            <td id="a7"></td>
+                            <td id="b7"></td>
+                            <td id="c7"></td>
+                            <td id="d7"></td>
+                            <td id="e7"></td>
+                            <td id="f7"></td>
+                            <td id="g7"></td>
+                        </tr>
+                        <tr>
+                            <td id="a8"></td>
+                            <td id="b8"></td>
+                            <td id="c8"></td>
+                            <td id="d8"></td>
+                            <td id="e8"></td>
+                            <td id="f8"></td>
+                            <td id="g8"></td>
+                        </tr>
+                        <tr>
+                            <td id="a9"></td>
+                            <td id="b9"></td>
+                            <td id="c9"></td>
+                            <td id="d9"></td>
+                            <td id="e9"></td>
+                            <td id="f9"></td>
+                            <td id="g9"></td>
+                        </tr>
+                        <tr>
+                            <td id="a10"></td>
+                            <td id="b10"></td>
+                            <td id="c10"></td>
+                            <td id="d10"></td>
+                            <td id="e10"></td>
+                            <td id="f10"></td>
+                            <td id="g10"></td>
+                        </tr>
+                        <tr>
+                            <td id="a11"></td>
+                            <td id="b11"></td>
+                            <td id="c11"></td>
+                            <td id="d11"></td>
+                            <td id="e11"></td>
+                            <td id="f11"></td>
+                            <td id="g11"></td>
+                        </tr>
+                        <tr>
+                            <td id="a12"></td>
+                            <td id="b12"></td>
+                            <td id="c12"></td>
+                            <td id="d12"></td>
+                            <td id="e12"></td>
+                            <td id="f12"></td>
+                            <td id="g12"></td>
+                        </tr>
+                        <tr>
+                            <td id="a13"></td>
+                            <td id="b13"></td>
+                            <td id="c13"></td>
+                            <td id="d13"></td>
+                            <td id="e13"></td>
+                            <td id="f13"></td>
+                            <td id="g13"></td>
+                        </tr>
+                        <tr>
+                            <td id="a14"></td>
+                            <td id="b14"></td>
+                            <td id="c14"></td>
+                            <td id="d14"></td>
+                            <td id="e14"></td>
+                            <td id="f14"></td>
+                            <td id="g14"></td>
+                        </tr>
+                        <tr>
+                            <td id="a15"></td>
+                            <td id="b15"></td>
+                            <td id="c15"></td>
+                            <td id="d15"></td>
+                            <td id="e15"></td>
+                            <td id="f15"></td>
+                            <td id="g15"></td>
+                        </tr>
+                        <tr>
+                            <td id="a16"></td>
+                            <td id="b16"></td>
+                            <td id="c16"></td>
+                            <td id="d16"></td>
+                            <td id="e16"></td>
+                            <td id="f16"></td>
+                            <td id="g16"></td>
+                        </tr>
+                        <tr>
+                            <td id="a17"></td>
+                            <td id="b17"></td>
+                            <td id="c17"></td>
+                            <td id="d17"></td>
+                            <td id="e17"></td>
+                            <td id="f17"></td>
+                            <td id="g17"></td>
+                        </tr>
+                        <tr>
+                            <td id="a18"></td>
+                            <td id="b18"></td>
+                            <td id="c18"></td>
+                            <td id="d18"></td>
+                            <td id="e18"></td>
+                            <td id="f18"></td>
+                            <td id="g18"></td>
+                        </tr>
+                        <tr>
+                            <td id="a19"></td>
+                            <td id="b19"></td>
+                            <td id="c19"></td>
+                            <td id="d19"></td>
+                            <td id="e19"></td>
+                            <td id="f19"></td>
+                            <td id="g19"></td>
+                        </tr>
+                        <tr>
+                            <td id="a20"></td>
+                            <td id="b20"></td>
+                            <td id="c20"></td>
+                            <td id="d20"></td>
+                            <td id="e20"></td>
+                            <td id="f20"></td>
+                            <td id="g20"></td>
+                        </tr>
+                        <tr>
+                            <td id="a21"></td>
+                            <td id="b21"></td>
+                            <td id="c21"></td>
+                            <td id="d21"></td>
+                            <td id="e21"></td>
+                            <td id="f21"></td>
+                            <td id="g21"></td>
+                        </tr>
+                        <tr>
+                            <td id="a22"></td>
+                            <td id="b22"></td>
+                            <td id="c22"></td>
+                            <td id="d22"></td>
+                            <td id="e22"></td>
+                            <td id="f22"></td>
+                            <td id="g22"></td>
+                        </tr>
+                        <tr>
+                            <td id="a23"></td>
+                            <td id="b23"></td>
+                            <td id="c23"></td>
+                            <td id="d23"></td>
+                            <td id="e23"></td>
+                            <td id="f23"></td>
+                            <td id="g23"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 8px"></div>
+            </div>
+
+            <div id="footerstats">
+                <img src="exit.png" width="90vw" />
+            </div>
+        </div>
+        <!-- end of pagethree -->
+
+        <!-- spacer -->
+        <div class="spacer1vh"></div>
+
+        <!-- popup accept panel -->
+        <div id="acceptpanel">
+            <span id="playerx"></span>
+            <br /><br />
+
+            Accept to save or Reject to re-edit.
+            <br /><br />
+            <button class="button1" onclick="rejectButton()">Reject</button>
+            <button class="button1" onclick="acceptButton()">Accept</button>
+        </div>
+
+        <!-- numbers grid -->
+        <div id="front9">
+            <table
+                align="left"
+                border="1"
+                cellpadding="1"
+                cellspacing="1"
+                style="height: 85%; width: 100%"
+            >
+                <tbody>
+                    <tr>
+                        <td class="head">hole</td>
+                        <td class="head">strokes</td>
+                        <td class="head">points</td>
+                        <td class="head">hole</td>
+                        <td class="head">strokes</td>
+                        <td class="head">points</td>
+                    </tr>
+                    <tr>
+                        <td id="hole1" onclick="resethole(this.id)">1</td>
+                        <td id="strokes1">0</td>
+                        <td id="points1">0</td>
+                        <td id="hole10" onclick="resethole(this.id)">10</td>
+                        <td id="strokes10">0</td>
+                        <td id="points10">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole2" onclick="resethole(this.id)">2</td>
+                        <td id="strokes2">0</td>
+                        <td id="points2">0</td>
+                        <td id="hole11" onclick="resethole(this.id)">11</td>
+                        <td id="strokes11">0</td>
+                        <td id="points11">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole3" onclick="resethole(this.id)">3</td>
+                        <td id="strokes3">0</td>
+                        <td id="points3">0</td>
+                        <td id="hole12" onclick="resethole(this.id)">12</td>
+                        <td id="strokes12">0</td>
+                        <td id="points12">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole4" onclick="resethole(this.id)">4</td>
+                        <td id="strokes4">0</td>
+                        <td id="points4">0</td>
+                        <td id="hole13" onclick="resethole(this.id)">13</td>
+                        <td id="strokes13">0</td>
+                        <td id="points13">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole5" onclick="resethole(this.id)">5</td>
+                        <td id="strokes5">0</td>
+                        <td id="points5">0</td>
+                        <td id="hole14" onclick="resethole(this.id)">14</td>
+                        <td id="strokes14">0</td>
+                        <td id="points14">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole6" onclick="resethole(this.id)">6</td>
+                        <td id="strokes6">0</td>
+                        <td id="points6">0</td>
+                        <td id="hole15" onclick="resethole(this.id)">15</td>
+                        <td id="strokes15">0</td>
+                        <td id="points15">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole7" onclick="resethole(this.id)">7</td>
+                        <td id="strokes7">0</td>
+                        <td id="points7">0</td>
+                        <td id="hole16" onclick="resethole(this.id)">16</td>
+                        <td id="strokes16">0</td>
+                        <td id="points16">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole8" onclick="resethole(this.id)">8</td>
+                        <td id="strokes8">0</td>
+                        <td id="points8">0</td>
+                        <td id="hole17" onclick="resethole(this.id)">17</td>
+                        <td id="strokes17">0</td>
+                        <td id="points17">0</td>
+                    </tr>
+                    <tr>
+                        <td id="hole9" onclick="resethole(this.id)">9</td>
+                        <td id="strokes9">0</td>
+                        <td id="points9">0</td>
+                        <td id="hole18" onclick="resethole(this.id)">18</td>
+                        <td id="strokes18">0</td>
+                        <td id="points18">0</td>
+                    </tr>
+                    <tr>
+                        <td>total</td>
+                        <td id="front9strokes">0</td>
+                        <td id="front9points">0</td>
+                        <td>total</td>
+                        <td id="back9strokes">0</td>
+                        <td id="back9points">0</td>
+                    </tr>
+                </tbody>
+            </table>
             <!-- spacer -->
+
             <div class="spacer1vh"></div>
 
-            <div id="acceptpanel">
-                <span id="playerx"></span>
-                <br /><br />
+            <!-- numberpad -->
+            <table
+                align="left"
+                border="0"
+                cellpadding="1"
+                cellspacing="1"
+                style="height: 85%; width: 100%"
+            >
+                <tbody>
+                    <tr>
+                        <td
+                            colspan="2"
+                            id="score1"
+                            onclick="numberScore(this.id)"
+                        >
+                            1
+                        </td>
+                        <td
+                            colspan="2"
+                            id="score2"
+                            onclick="numberScore(this.id)"
+                        >
+                            2
+                        </td>
+                        <td
+                            colspan="2"
+                            id="score3"
+                            onclick="numberScore(this.id)"
+                        >
+                            3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            colspan="2"
+                            id="score4"
+                            onclick="numberScore(this.id)"
+                        >
+                            4
+                        </td>
+                        <td
+                            colspan="2"
+                            id="score5"
+                            onclick="numberScore(this.id)"
+                        >
+                            5
+                        </td>
+                        <td
+                            colspan="2"
+                            id="score6"
+                            onclick="numberScore(this.id)"
+                        >
+                            6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            colspan="2"
+                            id="score7"
+                            onclick="numberScore(this.id)"
+                        >
+                            7
+                        </td>
+                        <td
+                            colspan="2"
+                            id="score8"
+                            onclick="numberScore(this.id)"
+                        >
+                            8
+                        </td>
+                        <td
+                            colspan="2"
+                            id="score9"
+                            onclick="numberScore(this.id)"
+                        >
+                            9
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--end of front 9 -->
 
-                Accept to save or Reject to re-edit.
-                <br /><br />
-                <button class="button1" onclick="rejectButton()">Reject</button>
-                <button class="button1" onclick="acceptButton()">Accept</button>
-            </div>
-
-            <div id="front9">
-                <table
-                    align="left"
-                    border="1"
-                    cellpadding="1"
-                    cellspacing="1"
-                    style="height: 85%; width: 100%"
-                >
-                    <tbody>
-                        <tr>
-                            <td class="head">hole</td>
-                            <td class="head">strokes</td>
-                            <td class="head">points</td>
-                            <td class="head">hole</td>
-                            <td class="head">strokes</td>
-                            <td class="head">points</td>
-                        </tr>
-                        <tr>
-                            <td id="hole1" onclick="resethole(this.id)">1</td>
-                            <td id="strokes1">0</td>
-                            <td id="points1">0</td>
-                            <td id="hole10" onclick="resethole(this.id)">10</td>
-                            <td id="strokes10">0</td>
-                            <td id="points10">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole2" onclick="resethole(this.id)">2</td>
-                            <td id="strokes2">0</td>
-                            <td id="points2">0</td>
-                            <td id="hole11" onclick="resethole(this.id)">11</td>
-                            <td id="strokes11">0</td>
-                            <td id="points11">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole3" onclick="resethole(this.id)">3</td>
-                            <td id="strokes3">0</td>
-                            <td id="points3">0</td>
-                            <td id="hole12" onclick="resethole(this.id)">12</td>
-                            <td id="strokes12">0</td>
-                            <td id="points12">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole4" onclick="resethole(this.id)">4</td>
-                            <td id="strokes4">0</td>
-                            <td id="points4">0</td>
-                            <td id="hole13" onclick="resethole(this.id)">13</td>
-                            <td id="strokes13">0</td>
-                            <td id="points13">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole5" onclick="resethole(this.id)">5</td>
-                            <td id="strokes5">0</td>
-                            <td id="points5">0</td>
-                            <td id="hole14" onclick="resethole(this.id)">14</td>
-                            <td id="strokes14">0</td>
-                            <td id="points14">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole6" onclick="resethole(this.id)">6</td>
-                            <td id="strokes6">0</td>
-                            <td id="points6">0</td>
-                            <td id="hole15" onclick="resethole(this.id)">15</td>
-                            <td id="strokes15">0</td>
-                            <td id="points15">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole7" onclick="resethole(this.id)">7</td>
-                            <td id="strokes7">0</td>
-                            <td id="points7">0</td>
-                            <td id="hole16" onclick="resethole(this.id)">16</td>
-                            <td id="strokes16">0</td>
-                            <td id="points16">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole8" onclick="resethole(this.id)">8</td>
-                            <td id="strokes8">0</td>
-                            <td id="points8">0</td>
-                            <td id="hole17" onclick="resethole(this.id)">17</td>
-                            <td id="strokes17">0</td>
-                            <td id="points17">0</td>
-                        </tr>
-                        <tr>
-                            <td id="hole9" onclick="resethole(this.id)">9</td>
-                            <td id="strokes9">0</td>
-                            <td id="points9">0</td>
-                            <td id="hole18" onclick="resethole(this.id)">18</td>
-                            <td id="strokes18">0</td>
-                            <td id="points18">0</td>
-                        </tr>
-                        <tr>
-                            <td>total</td>
-                            <td id="front9strokes">0</td>
-                            <td id="front9points">0</td>
-                            <td>total</td>
-                            <td id="back9strokes">0</td>
-                            <td id="back9points">0</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- spacer -->
-
-                <div class="spacer1vh"></div>
-
-                <!-- numberpad -->
-                <table
-                    align="left"
-                    border="0"
-                    cellpadding="1"
-                    cellspacing="1"
-                    style="height: 85%; width: 100%"
-                >
-                    <tbody>
-                        <tr>
-                            <td
-                                colspan="2"
-                                id="score1"
-                                onclick="numberScore(this.id)"
-                            >
-                                1
-                            </td>
-                            <td
-                                colspan="2"
-                                id="score2"
-                                onclick="numberScore(this.id)"
-                            >
-                                2
-                            </td>
-                            <td
-                                colspan="2"
-                                id="score3"
-                                onclick="numberScore(this.id)"
-                            >
-                                3
-                            </td>
-                        </tr>
-                        <tr>
-                            <td
-                                colspan="2"
-                                id="score4"
-                                onclick="numberScore(this.id)"
-                            >
-                                4
-                            </td>
-                            <td
-                                colspan="2"
-                                id="score5"
-                                onclick="numberScore(this.id)"
-                            >
-                                5
-                            </td>
-                            <td
-                                colspan="2"
-                                id="score6"
-                                onclick="numberScore(this.id)"
-                            >
-                                6
-                            </td>
-                        </tr>
-                        <tr>
-                            <td
-                                colspan="2"
-                                id="score7"
-                                onclick="numberScore(this.id)"
-                            >
-                                7
-                            </td>
-                            <td
-                                colspan="2"
-                                id="score8"
-                                onclick="numberScore(this.id)"
-                            >
-                                8
-                            </td>
-                            <td
-                                colspan="2"
-                                id="score9"
-                                onclick="numberScore(this.id)"
-                            >
-                                9
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!--
+        <!--
 https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/preview
 -->
-            <!-- invisible but necessary for submit of data	-->
-            <!-- form to construct data prior to submit -->
-            <form
-                action="https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/formResponse"
-                id="my-form"
-                method="post"
-                name="my-form"
-                target="my-response-iframe"
-            >
-                <!-- name, hcp, day, total -->
-                <input
-                    id="mx1433824128"
-                    name="entry.1433824128"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1064629217"
-                    name="entry.1064629217"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1119360478"
-                    name="entry.1119360478"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx83976721"
-                    name="entry.83976721"
-                    type="text"
-                    value="default"
-                />
+        <!-- invisible but necessary for submit of data	-->
+        <!-- form to construct data prior to submit -->
+        <form
+            action="https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/formResponse"
+            id="my-form"
+            method="post"
+            name="my-form"
+            target="my-response-iframe"
+        >
+            <!-- name, hcp, day, total -->
+            <input
+                id="mx1433824128"
+                name="entry.1433824128"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1064629217"
+                name="entry.1064629217"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1119360478"
+                name="entry.1119360478"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx83976721"
+                name="entry.83976721"
+                type="text"
+                value="default"
+            />
 
-                <input
-                    id="mx717166862"
-                    name="entry.717166862"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1175424116"
-                    name="entry.1175424116"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx849660193"
-                    name="entry.849660193"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1919564852"
-                    name="entry.1919564852"
-                    type="text"
-                    value="default"
-                />
+            <input
+                id="mx717166862"
+                name="entry.717166862"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1175424116"
+                name="entry.1175424116"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx849660193"
+                name="entry.849660193"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1919564852"
+                name="entry.1919564852"
+                type="text"
+                value="default"
+            />
 
-                <input
-                    id="mx1724692121"
-                    name="entry.1724692121"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1342174744"
-                    name="entry.1342174744"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx758799387"
-                    name="entry.758799387"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx2062182607"
-                    name="entry.2062182607"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1930917032"
-                    name="entry.1930917032"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1329253100"
-                    name="entry.1329253100"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx737258175"
-                    name="entry.737258175"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1107474420"
-                    name="entry.1107474420"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx801125525"
-                    name="entry.801125525"
-                    type="text"
-                    value="default"
-                />
+            <input
+                id="mx1724692121"
+                name="entry.1724692121"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1342174744"
+                name="entry.1342174744"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx758799387"
+                name="entry.758799387"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx2062182607"
+                name="entry.2062182607"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1930917032"
+                name="entry.1930917032"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1329253100"
+                name="entry.1329253100"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx737258175"
+                name="entry.737258175"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1107474420"
+                name="entry.1107474420"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx801125525"
+                name="entry.801125525"
+                type="text"
+                value="default"
+            />
 
-                <input
-                    id="mx481613746"
-                    name="entry.481613746"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx375771739"
-                    name="entry.375771739"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx515491474"
-                    name="entry.515491474"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx153870929"
-                    name="entry.153870929"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx534588764"
-                    name="entry.534588764"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1709130776"
-                    name="entry.1709130776"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1199544885"
-                    name="entry.1199544885"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1903245588"
-                    name="entry.1903245588"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1737150484"
-                    name="entry.1737150484"
-                    type="text"
-                    value="default"
-                />
+            <input
+                id="mx481613746"
+                name="entry.481613746"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx375771739"
+                name="entry.375771739"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx515491474"
+                name="entry.515491474"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx153870929"
+                name="entry.153870929"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx534588764"
+                name="entry.534588764"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1709130776"
+                name="entry.1709130776"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1199544885"
+                name="entry.1199544885"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1903245588"
+                name="entry.1903245588"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1737150484"
+                name="entry.1737150484"
+                type="text"
+                value="default"
+            />
 
-                <input
-                    id="mx1766971895"
-                    name="entry.1766971895"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1446347715"
-                    name="entry.1446347715"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1043639386"
-                    name="entry.1043639386"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1058489368"
-                    name="entry.1058489368"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx984229340"
-                    name="entry.984229340"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx888962172"
-                    name="entry.888962172"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx662079754"
-                    name="entry.662079754"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx857756573"
-                    name="entry.857756573"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx213108632"
-                    name="entry.213108632"
-                    type="text"
-                    value="default"
-                />
+            <input
+                id="mx1766971895"
+                name="entry.1766971895"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1446347715"
+                name="entry.1446347715"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1043639386"
+                name="entry.1043639386"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1058489368"
+                name="entry.1058489368"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx984229340"
+                name="entry.984229340"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx888962172"
+                name="entry.888962172"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx662079754"
+                name="entry.662079754"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx857756573"
+                name="entry.857756573"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx213108632"
+                name="entry.213108632"
+                type="text"
+                value="default"
+            />
 
-                <input
-                    id="mx965823425"
-                    name="entry.965823425"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1721064168"
-                    name="entry.1721064168"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx343171143"
-                    name="entry.343171143"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx32888434"
-                    name="entry.32888434"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1203648652"
-                    name="entry.1203648652"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx1811069542"
-                    name="entry.1811069542"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx410870339"
-                    name="entry.410870339"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx488847840"
-                    name="entry.488847840"
-                    type="text"
-                    value="default"
-                />
-                <input
-                    id="mx2086486082"
-                    name="entry.2086486082"
-                    type="text"
-                    value="default"
-                />
+            <input
+                id="mx965823425"
+                name="entry.965823425"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1721064168"
+                name="entry.1721064168"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx343171143"
+                name="entry.343171143"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx32888434"
+                name="entry.32888434"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1203648652"
+                name="entry.1203648652"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx1811069542"
+                name="entry.1811069542"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx410870339"
+                name="entry.410870339"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx488847840"
+                name="entry.488847840"
+                type="text"
+                value="default"
+            />
+            <input
+                id="mx2086486082"
+                name="entry.2086486082"
+                type="text"
+                value="default"
+            />
 
-                <input type="submit" />
-            </form>
-            <!-- google iframe inserted here - invisible -->
-            <iframe
-                height="100"
-                id="my-response-iframe"
-                name="my-response-iframe"
-                src="https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/viewform?embedded=true"
-                width="600"
-            >
-            </iframe>
-        </div>
+            <input type="submit" />
+        </form>
+        <!-- google iframe inserted here - invisible -->
+        <iframe
+            height="100"
+            id="my-response-iframe"
+            name="my-response-iframe"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSex_Xxhf0lykyqF46uKLKvOAzBAespsaqPyfln94ODzYueYRw/viewform?embedded=true"
+            width="600"
+        >
+        </iframe>
 
         <!--
 
@@ -1088,6 +1488,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             //var arrHcps = [];
             //var arrPlayers = [];
             var arrBirdies = [];
+            var arrStatsData = [];
             //var arrLadies = [];
             var arrOptions = [];
             var oldArrOptions = [];
@@ -1317,6 +1718,10 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                         // change "select player to course
                         document.getElementById("dropbtn").innerText =
                             player1name + " " + player1hcp + ":  " + days[day];
+                        // update stats screen
+                        document.getElementById("headerpagethree").innerText =
+                            "stats for " + player1name;
+                        getStats();
                     }
                 }
                 // find player in options list
@@ -1587,14 +1992,14 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
 
             /*
 
-            https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhjabhjg1JvCQg/viewform?usp=pp_url
-            &entry.1433824128=p
-            &entry.1064629217=h
-            &entry.1119360478=d&entry.83976721=p&entry.717166862=9&entry.1175424116=6&entry.849660193=3&entry.1919564852=1&entry.1724692121=1&entry.1342174744=2&entry.758799387=3&entry.2062182607=4&entry.1930917032=5&entry.1329253100=6&entry.737258175=7&entry.1107474420=8&entry.801125525=9&entry.481613746=0&entry.375771739=11&entry.515491474=12&entry.153870929=13&entry.534588764=14&entry.1709130776=15&entry.1199544885=16&entry.1903245588=17&entry.1737150484=18&entry.1766971895=1&entry.1446347715=2&entry.1043639386=3&entry.1058489368=4&entry.984229340=5&entry.888962172=6&entry.662079754=7&entry.857756573=8&entry.213108632=9&entry.965823425=10&entry.1721064168=11&entry.343171143=12&entry.32888434=13&entry.1203648652=14&entry.1811069542=15&entry.410870339=16&entry.488847840=17&entry.2086486082=17
+                        https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhjabhjg1JvCQg/viewform?usp=pp_url
+                        &entry.1433824128=p
+                        &entry.1064629217=h
+                        &entry.1119360478=d&entry.83976721=p&entry.717166862=9&entry.1175424116=6&entry.849660193=3&entry.1919564852=1&entry.1724692121=1&entry.1342174744=2&entry.758799387=3&entry.2062182607=4&entry.1930917032=5&entry.1329253100=6&entry.737258175=7&entry.1107474420=8&entry.801125525=9&entry.481613746=0&entry.375771739=11&entry.515491474=12&entry.153870929=13&entry.534588764=14&entry.1709130776=15&entry.1199544885=16&entry.1903245588=17&entry.1737150484=18&entry.1766971895=1&entry.1446347715=2&entry.1043639386=3&entry.1058489368=4&entry.984229340=5&entry.888962172=6&entry.662079754=7&entry.857756573=8&entry.213108632=9&entry.965823425=10&entry.1721064168=11&entry.343171143=12&entry.32888434=13&entry.1203648652=14&entry.1811069542=15&entry.410870339=16&entry.488847840=17&entry.2086486082=17
 
 
 
-            */
+                        */
 
             //=============================================================
             // function submitForm()
@@ -2029,17 +2434,15 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 totalScores();
             }
 
-            function showLeaderBoard() {
+            function showPageTwo() {
                 //alert("leaderboard")
-                document.getElementById("showleaderboard").style.display =
-                    "block";
+                document.getElementById("pagetwo").style.display = "block";
                 getData();
             }
 
             function closeLeaderBoard() {
                 //alert("leaderboard")
-                document.getElementById("showleaderboard").style.display =
-                    "none";
+                document.getElementById("pagetwo").style.display = "none";
             }
 
             // data is available here
@@ -2063,20 +2466,19 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                     // if no results show text
                     // else
                     // show results
-                    if (data.length == 0) {
-                        document.getElementById("headerinfo").innerText =
-                            "no results";
-                    } else {
-                        console.log(data);
-                        // sort by hcp, lowest first
-                        data.sort((a, b) => parseInt(a.hcp) - parseInt(b.hcp));
-                        // sort by score, highest first
-                        data.sort(
-                            (a, b) =>
-                                parseInt(b.playerpoints) -
-                                parseInt(a.playerpoints),
-                        );
-                    }
+                    //if (data.length == 0) {
+                    //    document.getElementById("headerinfo").innerText =
+                    //        "no results";
+                    //} else {
+                    console.log(data);
+                    // sort by hcp, lowest first
+                    data.sort((a, b) => parseInt(a.hcp) - parseInt(b.hcp));
+                    // sort by score, highest first
+                    data.sort(
+                        (a, b) =>
+                            parseInt(b.playerpoints) - parseInt(a.playerpoints),
+                    );
+                    // }
                 } catch (error) {
                     console.error(error.message);
                 }
@@ -2084,7 +2486,9 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             }
 
             function useData() {
-                let container = document.getElementById("menu1");
+                let container = document.getElementById(
+                    "createleaderboarditems",
+                );
                 // empty container
                 container.innerHTML = "";
 
@@ -2097,6 +2501,12 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                     let box = document.createElement("div");
                     box.id = "box" + i;
                     box.className = "team";
+
+                    box.setAttribute(
+                        "onclick",
+                        "showPageThree();return false;",
+                    );
+
                     //box.style.setProperty("--i", i);
                     let name = document.createElement("span");
                     name.id = "name" + i;
@@ -2290,6 +2700,138 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             function initialBodyUpdate(nom, pos) {
                 document.getElementById("name" + pos).innerText = nom;
                 document.getElementById("position" + pos).innerText = "";
+            }
+
+            function showPageOne() {
+                document.getElementById("pageone").style.display = "block";
+                document.getElementById("pagetwo").style.display = "none";
+                document.getElementById("pagethree").style.display = "none";
+            }
+
+            function showPageTwo() {
+                document.getElementById("pageone").style.display = "none";
+                document.getElementById("pagetwo").style.display = "block";
+                document.getElementById("pagethree").style.display = "none";
+
+                getData();
+            }
+
+            function showPageThree() {
+                document.getElementById("pageone").style.display = "none";
+                document.getElementById("pagetwo").style.display = "none";
+                document.getElementById("pagethree").style.display = "block";
+
+                getStats();
+            }
+
+            function closeStatsScreen() {
+                document.getElementById("pagethree").style.display = "none";
+            }
+
+            async function getStats() {
+                if (player1name == "Bob") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/bobaveragecsv";
+                }
+                if (player1name == "Bryan") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/bryanaveragecsv";
+                }
+                if (player1name == "Dale") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/daleaveragecsv";
+                }
+                if (player1name == "Dean") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/deanaveragecsv";
+                }
+                if (player1name == "Graham") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/grahamaveragecsv";
+                }
+                if (player1name == "Ian") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/ianaveragecsv";
+                }
+                if (player1name == "Joe") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/joeaveragecsv";
+                }
+                if (player1name == "John") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/johnaveragecsv";
+                }
+                if (player1name == "Steve") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/steveaveragecsv";
+                }
+                if (player1name == "Tony") {
+                    url =
+                        "https://opensheet.elk.sh/1HMDZQd3M4r8xOpQLV0J1IQxSy5U94HTeso3ibtb4a4s/tonyaveragecsv";
+                }
+                try {
+                    const dataStream = await fetch(url);
+                    if (!dataStream.ok) {
+                        throw new Error(
+                            `Response status: ${dataStream.status}`,
+                        );
+                    }
+                    statsdata = await dataStream.json();
+                    // don't need blank players
+                    statsdata = statsdata.filter(function (el) {
+                        return el.players !== "xxxx";
+                    });
+
+                    arrMyScores = statsdata.map((d) => d.Bryan);
+                    arrMyPoints = statsdata.map((d) => d.points);
+
+                    arrPar = statsdata.map((d) => d.par);
+                    arrSi = statsdata.map((d) => d.si);
+
+                    arrPercent = statsdata.map((d) => d.percent);
+                    arrComment = statsdata.map((d) => d.comment);
+                    // if no results show text
+                    // else
+                    // show results
+                    if (statsdata.length == 0) {
+                        //document.getElementById("headerinfo").innerText =
+                        //    "no results";
+                        console.log("no results");
+                    } else {
+                        console.log(arrMyScores);
+                        // sort by hcp, lowest first
+                        //statsdata.sort((a, b) => parseInt(a.hcp) - parseInt(b.hcp));
+                        // sort by score, highest first
+                        //statsdata.sort(
+                        //    (a, b) =>
+                        //        parseInt(b.playerpoints) -
+                        //        parseInt(a.playerpoints),
+                        //);
+                        //
+                        //
+                        //alert(arrStats);
+                        //
+                        for (i = 0; i < 18; i++) {
+                            document.getElementById("a" + (i + 1)).innerText =
+                                i + 1;
+                            document.getElementById("b" + (i + 1)).innerText =
+                                arrPar[i];
+                            document.getElementById("c" + (i + 1)).innerText =
+                                arrSi[i];
+                            document.getElementById("d" + (i + 1)).innerText =
+                                arrMyScores[i];
+                            document.getElementById("e" + (i + 1)).innerText =
+                                arrMyPoints[i];
+                            document.getElementById("f" + (i + 1)).innerText =
+                                arrPercent[i];
+                            document.getElementById("g" + (i + 1)).innerText =
+                                arrComment[i];
+                        }
+                    }
+                } catch (error) {
+                    console.error(error.message);
+                }
+                //useStatsData(statsdata.bryan);
             }
         </script>
     </body>
