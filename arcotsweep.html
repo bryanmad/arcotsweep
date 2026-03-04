@@ -2833,6 +2833,24 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                                 document.getElementById(
                                     "g" + (i + 1),
                                 ).innerText = arrComment[i];
+
+                                if (arrComment[i] == "tragic") {
+                                    document.getElementById(
+                                        "g" + (i + 1),
+                                    ).style.color = "red";
+                                    document.getElementById(
+                                        "g" + (i + 1),
+                                    ).style.fontWeight = "bold";
+                                }
+                                if (arrComment[i] == "poor") {
+                                    document.getElementById(
+                                        "g" + (i + 1),
+                                    ).style.color = "yellow";
+
+                                    document.getElementById(
+                                        "g" + (i + 1),
+                                    ).style.fontWeight = "bold";
+                                }
                             }
                         }
                     }
