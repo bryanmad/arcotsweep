@@ -2810,7 +2810,22 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                         //alert(arrStats);
                         //
                         // if no results ...
-                        if (arrMyScores[0] !== "#DIV/0!") {
+                        //
+                        console.log(
+                            "arrMyScores = " +
+                                arrMyScores[0] +
+                                " and length = " +
+                                arrMyScores.length,
+                        );
+
+                        //console.log(player1name);
+                        //console.log(arrMyScores[0]);
+                        //
+                        // only show if scores are there and player is set
+                        if (
+                            arrMyScores[0] !== undefined ||
+                            player1name !== "player 1"
+                        ) {
                             for (i = 0; i < 18; i++) {
                                 document.getElementById(
                                     "a" + (i + 1),
