@@ -2895,9 +2895,10 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                                     ).style.fontWeight = "bold";
                                 }
                             }
-                        }
+                            // draw graph
 
-                        drawGraph(arrMyPoints);
+                            drawGraph(arrMyPoints);
+                        }
                     }
                 } catch (error) {
                     console.error(error.message);
@@ -2906,6 +2907,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             }
 
             function drawGraph(arrMyPoints) {
+                var PlayerGraph;
                 const xValues = [
                     "1",
                     "2",
@@ -2928,12 +2930,19 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 ];
                 //const yValues = [55, 49, 44, 24, 15];
 
-                const yValues = arrMyPoints;
-                const barColors = ["cyan"];
+                var yValues = arrMyPoints;
+                var barColors = ["cyan"];
 
-                const ctx = document.getElementById("myChart");
+                var ctx = document.getElementById("myChart");
+                try {
+                    var PlayerGraph = Chart.getChart("myChart");
+                    PlayerGraph.destroy();
+                    console.log("trying to destory then redraw chart");
+                } catch (e) {
+                    console.log("chart does not exist yet to destroy");
+                }
                 Chart.defaults.font.size = 10;
-                new Chart(ctx, {
+                var PlayerGraph = new Chart(ctx, {
                     type: "bar",
                     data: {
                         labels: xValues,
