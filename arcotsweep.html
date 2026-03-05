@@ -12,6 +12,7 @@
             rel="stylesheet"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
         <style>
 
                                                 	/* icon color #bef081 */
@@ -905,6 +906,13 @@
                             <td id="f19"></td>
                             <td id="g19"></td>
                         </tr>
+
+                        <!-- HCP graph -->
+                        <canvas
+                            id="myChart"
+                            style="width: 90%; max-width: 95vw"
+                        ></canvas>
+
                         <!--
                         <tr>
                             <td id="a20"></td>
@@ -2883,11 +2891,65 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                                 }
                             }
                         }
+
+                        drawGraph(arrMyPoints);
                     }
                 } catch (error) {
                     console.error(error.message);
                 }
                 //useStatsData(statsdata.bryan);
+            }
+
+            function drawGraph(arrMyPoints) {
+                const xValues = [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                ];
+                //const yValues = [55, 49, 44, 24, 15];
+
+                const yValues = arrMyPoints;
+                const barColors = ["cyan"];
+
+                const ctx = document.getElementById("myChart");
+                Chart.defaults.font.size = 10;
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: xValues,
+                        datasets: [
+                            {
+                                backgroundColor: barColors,
+                                data: yValues,
+                            },
+                        ],
+                    },
+                    options: {
+                        plugins: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "Average points scored on each hole",
+                                font: { size: 16, color: "white" },
+                            },
+                        },
+                    },
+                });
             }
         </script>
     </body>
