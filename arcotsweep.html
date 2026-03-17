@@ -1782,7 +1782,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 calcAllHoles();
                 document.getElementById("hole1").style.color = "black";
                 document.getElementById("hole1").style.background = "lime";
-                console.log("currenthole = " + currenthole);
+                //console.log("currenthole = " + currenthole);
                 // highlight doublebogey
                 doubleBogeyCalc(hcp, arrCourse[1][1], arrCourse[1][2]);
             }
@@ -1829,7 +1829,7 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
 
                 if (currenthole < 18) {
                     // highlight doublebogey for hole
-                    console.log(
+                    //console.log(
                         "doubleBogeyCalc = ",
                         currenthole,
                         hcp,
@@ -2033,20 +2033,20 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                         el.classList.remove("cyan");
                     }
                 }
-                console.log("inside doubleBogeyCalc", xhcp, xpar, xsi);
-                console.log("currenthole = " + currenthole);
+                //console.log("inside doubleBogeyCalc", xhcp, xpar, xsi);
+                //console.log("currenthole = " + currenthole);
                 var db = 0;
                 var temp = 0;
                 for (xscore = 1; xscore <= 9; xscore++) {
                     temp = pointsCalc(xhcp, xpar, xsi, xscore);
-                    console.log("xscore = " + xscore + "  temp = " + temp);
+                    //console.log("xscore = " + xscore + "  temp = " + temp);
                     if (temp == 0) {
                         db = xscore;
                         break;
                     }
                 }
 
-                console.log("db = " + db);
+                //console.log("db = " + db);
 
                 // set color of doublebogey number
                 document.getElementById("score" + db).classList.add("cyan");
