@@ -678,6 +678,11 @@
                                     #toptr {
                                         color: cyan;
                                     }
+
+                                    .cyan {
+
+                                       background: dodgerBlue;
+                                    }
         </style>
     </head>
     <body>
@@ -1777,6 +1782,9 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 calcAllHoles();
                 document.getElementById("hole1").style.color = "black";
                 document.getElementById("hole1").style.background = "lime";
+                console.log("currenthole = " + currenthole);
+                // highlight doublebogey
+                doubleBogeyCalc(hcp, arrCourse[1][1], arrCourse[1][2]);
             }
             //=============================================================
             // function toggleDropdown()
@@ -1795,8 +1803,8 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
             function numberScore(id) {
                 // id is number button pressed eg. score5
                 // color the button
-                document.getElementById(id).style.color = "black";
-                document.getElementById(id).style.background = "lime";
+                //document.getElementById(id).style.color = "black";
+                //document.getElementById(id).style.background = "lime";
 
                 currenthole++;
                 //console.log("currenthole = " + currenthole);
@@ -1819,8 +1827,21 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 document.getElementById("hole" + nexthole).style.background =
                     "lime";
 
-                // update score
-
+                if (currenthole < 18) {
+                    // highlight doublebogey for hole
+                    console.log(
+                        "doubleBogeyCalc = ",
+                        currenthole,
+                        hcp,
+                        arrCourse[currenthole + 1][1],
+                        arrCourse[currenthole + 1][2],
+                    );
+                    doubleBogeyCalc(
+                        hcp,
+                        arrCourse[currenthole + 1][1],
+                        arrCourse[currenthole + 1][2],
+                    );
+                }
                 //console.log("strokes" + currenthole);
 
                 document.getElementById("strokes" + currenthole).innerText =
@@ -1854,10 +1875,10 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 }
 
                 // put button color back
-                setTimeout(function () {
-                    document.getElementById(id).style.background = "black";
-                    document.getElementById(id).style.color = "lime";
-                }, 100);
+                //setTimeout(function () {
+                //    document.getElementById(id).style.background = "black";
+                //    document.getElementById(id).style.color = "lime";
+                // }, 100);
             }
             //=============================================================
             // function resethole(id)
@@ -2000,16 +2021,36 @@ https://docs.google.com/forms/d/1g7SBX8Kz1oLoKs5Y_WjwGd6CoITDQeUzkXGLvPGdE1s/pre
                 }
             }
 
-            /*
+            //=============================================================
+            // function doubleBogeyCalc(xhcp, xpar, xsi, xscore)
+            // - indicates score to No stableford points
+            //=============================================================
+            function doubleBogeyCalc(xhcp, xpar, xsi) {
+                // reset color of numbers
+                for (n = 1; n <= 9; n++) {
+                    el = document.getElementById("score" + n);
+                    if (el.classList.contains("cyan")) {
+                        el.classList.remove("cyan");
+                    }
+                }
+                console.log("inside doubleBogeyCalc", xhcp, xpar, xsi);
+                console.log("currenthole = " + currenthole);
+                var db = 0;
+                var temp = 0;
+                for (xscore = 1; xscore <= 9; xscore++) {
+                    temp = pointsCalc(xhcp, xpar, xsi, xscore);
+                    console.log("xscore = " + xscore + "  temp = " + temp);
+                    if (temp == 0) {
+                        db = xscore;
+                        break;
+                    }
+                }
 
-                        https://docs.google.com/forms/d/e/1FAIpQLSdjtJrrtuD6fBUPTOnVAp9RxkPK4D2Oib-TLhjabhjg1JvCQg/viewform?usp=pp_url
-                        &entry.1433824128=p
-                        &entry.1064629217=h
-                        &entry.1119360478=d&entry.83976721=p&entry.717166862=9&entry.1175424116=6&entry.849660193=3&entry.1919564852=1&entry.1724692121=1&entry.1342174744=2&entry.758799387=3&entry.2062182607=4&entry.1930917032=5&entry.1329253100=6&entry.737258175=7&entry.1107474420=8&entry.801125525=9&entry.481613746=0&entry.375771739=11&entry.515491474=12&entry.153870929=13&entry.534588764=14&entry.1709130776=15&entry.1199544885=16&entry.1903245588=17&entry.1737150484=18&entry.1766971895=1&entry.1446347715=2&entry.1043639386=3&entry.1058489368=4&entry.984229340=5&entry.888962172=6&entry.662079754=7&entry.857756573=8&entry.213108632=9&entry.965823425=10&entry.1721064168=11&entry.343171143=12&entry.32888434=13&entry.1203648652=14&entry.1811069542=15&entry.410870339=16&entry.488847840=17&entry.2086486082=17
+                console.log("db = " + db);
 
-
-
-                        */
+                // set color of doublebogey number
+                document.getElementById("score" + db).classList.add("cyan");
+            }
 
             //=============================================================
             // function submitForm()
